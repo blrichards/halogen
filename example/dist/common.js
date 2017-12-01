@@ -115,9 +115,8 @@ var Mixin = {
 };
 
 var AutoFocusUtils = {
-  Mixin: Mixin,
-
-  focusDOMComponent: function () {
+  Mixin: Mixin
+focusDOMComponent: function () {
     focusNode(ReactMount.getNode(this._rootNodeID));
   }
 };
@@ -513,9 +512,8 @@ function extractBeforeInputEvent(topLevelType, topLevelTarget, topLevelTargetID,
  */
 var BeforeInputEventPlugin = {
 
-  eventTypes: eventTypes,
-
-  /**
+  eventTypes: eventTypes
+/**
    * @param {string} topLevelType Record from `EventConstants`.
    * @param {DOMEventTarget} topLevelTarget The listening component root node.
    * @param {string} topLevelTargetID ID of `topLevelTarget`.
@@ -567,9 +565,8 @@ var isUnitlessNumber = {
   tabSize: true,
   widows: true,
   zIndex: true,
-  zoom: true,
-
-  // SVG-related properties
+  zoom: true
+// SVG-related properties
   fillOpacity: true,
   stopOpacity: true,
   strokeDashoffset: true,
@@ -800,9 +797,8 @@ var CSSPropertyOperations = {
       }
     }
     return serialized || null;
-  },
-
-  /**
+  }
+/**
    * Sets the value for multiple styles on a node.  If a value is specified as
    * '' (empty string), the corresponding style property will be unset.
    *
@@ -898,9 +894,8 @@ assign(CallbackQueue.prototype, {
     this._contexts = this._contexts || [];
     this._callbacks.push(callback);
     this._contexts.push(context);
-  },
-
-  /**
+  }
+/**
    * Invokes all enqueued callbacks and clears the queue. This is invoked after
    * the DOM representation of a component has been created or updated.
    *
@@ -919,9 +914,8 @@ assign(CallbackQueue.prototype, {
       callbacks.length = 0;
       contexts.length = 0;
     }
-  },
-
-  /**
+  }
+/**
    * Resets the internal queue.
    *
    * @internal
@@ -929,9 +923,8 @@ assign(CallbackQueue.prototype, {
   reset: function () {
     this._callbacks = null;
     this._contexts = null;
-  },
-
-  /**
+  }
+/**
    * `PooledClass` looks for this.
    */
   destructor: function () {
@@ -1219,9 +1212,8 @@ function getTargetIDForClickEvent(topLevelType, topLevelTarget, topLevelTargetID
  */
 var ChangeEventPlugin = {
 
-  eventTypes: eventTypes,
-
-  /**
+  eventTypes: eventTypes
+/**
    * @param {string} topLevelType Record from `EventConstants`.
    * @param {DOMEventTarget} topLevelTarget The listening component root node.
    * @param {string} topLevelTargetID ID of `topLevelTarget`.
@@ -1341,11 +1333,9 @@ function insertChildAt(parentNode, childNode, index) {
  */
 var DOMChildrenOperations = {
 
-  dangerouslyReplaceNodeWithMarkup: Danger.dangerouslyReplaceNodeWithMarkup,
-
-  updateTextContent: setTextContent,
-
-  /**
+  dangerouslyReplaceNodeWithMarkup: Danger.dangerouslyReplaceNodeWithMarkup
+updateTextContent: setTextContent
+/**
    * Updates a component's children by processing a series of updates. The
    * update configurations are each expected to have a `parentNode` property.
    *
@@ -1457,9 +1447,8 @@ var DOMPropertyInjection = {
   HAS_BOOLEAN_VALUE: 0x8,
   HAS_NUMERIC_VALUE: 0x10,
   HAS_POSITIVE_NUMERIC_VALUE: 0x20 | 0x10,
-  HAS_OVERLOADED_BOOLEAN_VALUE: 0x40,
-
-  /**
+  HAS_OVERLOADED_BOOLEAN_VALUE: 0x40
+/**
    * Inject some specialized knowledge about the DOM. This takes a config object
    * with the following properties:
    *
@@ -1509,9 +1498,8 @@ var DOMPropertyInjection = {
         attributeName: lowerCased,
         attributeNamespace: null,
         propertyName: propName,
-        mutationMethod: null,
-
-        mustUseAttribute: checkMask(propConfig, Injection.MUST_USE_ATTRIBUTE),
+        mutationMethod: null
+      mustUseAttribute: checkMask(propConfig, Injection.MUST_USE_ATTRIBUTE),
         mustUseProperty: checkMask(propConfig, Injection.MUST_USE_PROPERTY),
         hasSideEffects: checkMask(propConfig, Injection.HAS_SIDE_EFFECTS),
         hasBooleanValue: checkMask(propConfig, Injection.HAS_BOOLEAN_VALUE),
@@ -1569,9 +1557,8 @@ var defaultValueCache = {};
  */
 var DOMProperty = {
 
-  ID_ATTRIBUTE_NAME: 'data-reactid',
-
-  /**
+  ID_ATTRIBUTE_NAME: 'data-reactid'
+/**
    * Map from property "standard name" to an object with info about how to set
    * the property in the DOM. Each object contains:
    *
@@ -1607,21 +1594,18 @@ var DOMProperty = {
    *   Removed when strictly equal to false; present without a value when
    *   strictly equal to true; present with a value otherwise.
    */
-  properties: {},
-
-  /**
+  properties: {}
+/**
    * Mapping from lowercase property names to the properly cased version, used
    * to warn in the case of missing properties. Available only in __DEV__.
    * @type {Object}
    */
-  getPossibleStandardName: process.env.NODE_ENV !== 'production' ? {} : null,
-
-  /**
+  getPossibleStandardName: process.env.NODE_ENV !== 'production' ? {} : null
+/**
    * All of the isCustomAttribute() functions that have been injected.
    */
-  _isCustomAttributeFunctions: [],
-
-  /**
+  _isCustomAttributeFunctions: []
+/**
    * Checks whether a property name is a custom attribute.
    * @method
    */
@@ -1633,9 +1617,8 @@ var DOMProperty = {
       }
     }
     return false;
-  },
-
-  /**
+  }
+/**
    * Returns the default property value for a DOM property (i.e., not an
    * attribute). Most default values are '' or false, but not all. Worse yet,
    * some (in particular, `type`) vary depending on the type of element.
@@ -1654,9 +1637,8 @@ var DOMProperty = {
       nodeDefaults[prop] = testElement[prop];
     }
     return nodeDefaults[prop];
-  },
-
-  injection: DOMPropertyInjection
+  }
+injection: DOMPropertyInjection
 };
 
 module.exports = DOMProperty;
@@ -1748,13 +1730,11 @@ var DOMPropertyOperations = {
    */
   createMarkupForID: function (id) {
     return DOMProperty.ID_ATTRIBUTE_NAME + '=' + quoteAttributeValueForBrowser(id);
-  },
-
-  setAttributeForID: function (node, id) {
+  }
+setAttributeForID: function (node, id) {
     node.setAttribute(DOMProperty.ID_ATTRIBUTE_NAME, id);
-  },
-
-  /**
+  }
+/**
    * Creates markup for a property.
    *
    * @param {string} name
@@ -1781,9 +1761,8 @@ var DOMPropertyOperations = {
       warnUnknownProperty(name);
     }
     return null;
-  },
-
-  /**
+  }
+/**
    * Creates markup for a custom property.
    *
    * @param {string} name
@@ -1795,9 +1774,8 @@ var DOMPropertyOperations = {
       return '';
     }
     return name + '=' + quoteAttributeValueForBrowser(value);
-  },
-
-  /**
+  }
+/**
    * Sets the value for a property on a node.
    *
    * @param {DOMElement} node
@@ -1839,9 +1817,8 @@ var DOMPropertyOperations = {
     } else if (process.env.NODE_ENV !== 'production') {
       warnUnknownProperty(name);
     }
-  },
-
-  setValueForAttribute: function (node, name, value) {
+  }
+setValueForAttribute: function (node, name, value) {
     if (!isAttributeNameSafe(name)) {
       return;
     }
@@ -1850,9 +1827,8 @@ var DOMPropertyOperations = {
     } else {
       node.setAttribute(name, '' + value);
     }
-  },
-
-  /**
+  }
+/**
    * Deletes the value for a property on a node.
    *
    * @param {DOMElement} node
@@ -2011,9 +1987,8 @@ var Danger = {
     !(resultList.length === markupList.length) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Danger: Expected markup to render %s nodes, but rendered %s.', markupList.length, resultList.length) : invariant(false) : undefined;
 
     return resultList;
-  },
-
-  /**
+  }
+/**
    * Replaces a node with a string of markup at its current position within its
    * parent. The markup must render into a single root node.
    *
@@ -2108,9 +2083,8 @@ var extractedEvents = [null, null];
 
 var EnterLeaveEventPlugin = {
 
-  eventTypes: eventTypes,
-
-  /**
+  eventTypes: eventTypes
+/**
    * For almost every interaction we care about, there will be both a top-level
    * `mouseover` and `mouseout` event that occurs. Only use `mouseout` so that
    * we do not extract duplicate events. However, moving the mouse into the
@@ -2388,9 +2362,8 @@ var EventPluginHub = {
      * @param {object} InjectedMount
      * @public
      */
-    injectMount: EventPluginUtils.injection.injectMount,
-
-    /**
+    injectMount: EventPluginUtils.injection.injectMount
+  /**
      * @param {object} InjectedInstanceHandle
      * @public
      */
@@ -2399,33 +2372,27 @@ var EventPluginHub = {
       if (process.env.NODE_ENV !== 'production') {
         validateInstanceHandle();
       }
-    },
-
-    getInstanceHandle: function () {
+    }
+  getInstanceHandle: function () {
       if (process.env.NODE_ENV !== 'production') {
         validateInstanceHandle();
       }
       return InstanceHandle;
-    },
-
-    /**
+    }
+  /**
      * @param {array} InjectedEventPluginOrder
      * @public
      */
-    injectEventPluginOrder: EventPluginRegistry.injectEventPluginOrder,
-
-    /**
+    injectEventPluginOrder: EventPluginRegistry.injectEventPluginOrder
+  /**
      * @param {object} injectedNamesToPlugins Map from names to plugin modules.
      */
     injectEventPluginsByName: EventPluginRegistry.injectEventPluginsByName
 
-  },
-
-  eventNameDispatchConfigs: EventPluginRegistry.eventNameDispatchConfigs,
-
-  registrationNameModules: EventPluginRegistry.registrationNameModules,
-
-  /**
+  }
+eventNameDispatchConfigs: EventPluginRegistry.eventNameDispatchConfigs
+registrationNameModules: EventPluginRegistry.registrationNameModules
+/**
    * Stores `listener` at `listenerBank[registrationName][id]`. Is idempotent.
    *
    * @param {string} id ID of the DOM element.
@@ -2442,9 +2409,8 @@ var EventPluginHub = {
     if (PluginModule && PluginModule.didPutListener) {
       PluginModule.didPutListener(id, registrationName, listener);
     }
-  },
-
-  /**
+  }
+/**
    * @param {string} id ID of the DOM element.
    * @param {string} registrationName Name of listener (e.g. `onClick`).
    * @return {?function} The stored callback.
@@ -2452,9 +2418,8 @@ var EventPluginHub = {
   getListener: function (id, registrationName) {
     var bankForRegistrationName = listenerBank[registrationName];
     return bankForRegistrationName && bankForRegistrationName[id];
-  },
-
-  /**
+  }
+/**
    * Deletes a listener from the registration bank.
    *
    * @param {string} id ID of the DOM element.
@@ -2471,9 +2436,8 @@ var EventPluginHub = {
     if (bankForRegistrationName) {
       delete bankForRegistrationName[id];
     }
-  },
-
-  /**
+  }
+/**
    * Deletes all listeners for the DOM element with the supplied ID.
    *
    * @param {string} id ID of the DOM element.
@@ -2491,9 +2455,8 @@ var EventPluginHub = {
 
       delete listenerBank[registrationName][id];
     }
-  },
-
-  /**
+  }
+/**
    * Allows registered plugins an opportunity to extract events from top-level
    * native browser events.
    *
@@ -2518,9 +2481,8 @@ var EventPluginHub = {
       }
     }
     return events;
-  },
-
-  /**
+  }
+/**
    * Enqueues a synthetic event that should be dispatched when
    * `processEventQueue` is invoked.
    *
@@ -2531,9 +2493,8 @@ var EventPluginHub = {
     if (events) {
       eventQueue = accumulateInto(eventQueue, events);
     }
-  },
-
-  /**
+  }
+/**
    * Dispatches all synthetic events on the event queue.
    *
    * @internal
@@ -2551,16 +2512,14 @@ var EventPluginHub = {
     !!eventQueue ? process.env.NODE_ENV !== 'production' ? invariant(false, 'processEventQueue(): Additional events were enqueued while processing ' + 'an event queue. Support for this has not yet been implemented.') : invariant(false) : undefined;
     // This would be a good time to rethrow if any of the event handlers threw.
     ReactErrorUtils.rethrowCaughtError();
-  },
-
-  /**
+  }
+/**
    * These are needed for tests only. Do not use!
    */
   __purge: function () {
     listenerBank = {};
-  },
-
-  __getListenerBank: function () {
+  }
+__getListenerBank: function () {
     return listenerBank;
   }
 
@@ -2675,24 +2634,20 @@ var EventPluginRegistry = {
   /**
    * Ordered list of injected plugins.
    */
-  plugins: [],
-
-  /**
+  plugins: []
+/**
    * Mapping from event name to dispatch config
    */
-  eventNameDispatchConfigs: {},
-
-  /**
+  eventNameDispatchConfigs: {}
+/**
    * Mapping from registration name to plugin module
    */
-  registrationNameModules: {},
-
-  /**
+  registrationNameModules: {}
+/**
    * Mapping from registration name to event name
    */
-  registrationNameDependencies: {},
-
-  /**
+  registrationNameDependencies: {}
+/**
    * Injects an ordering of plugins (by plugin name). This allows the ordering
    * to be decoupled from injection of the actual plugins so that ordering is
    * always deterministic regardless of packaging, on-the-fly injection, etc.
@@ -2706,9 +2661,8 @@ var EventPluginRegistry = {
     // Clone the ordering so it cannot be dynamically mutated.
     EventPluginOrder = Array.prototype.slice.call(InjectedEventPluginOrder);
     recomputePluginOrdering();
-  },
-
-  /**
+  }
+/**
    * Injects plugins to be used by `EventPluginHub`. The plugin names must be
    * in the ordering injected by `injectEventPluginOrder`.
    *
@@ -2734,9 +2688,8 @@ var EventPluginRegistry = {
     if (isOrderingDirty) {
       recomputePluginOrdering();
     }
-  },
-
-  /**
+  }
+/**
    * Looks up the plugin for the supplied event.
    *
    * @param {object} event A synthetic event.
@@ -2758,9 +2711,8 @@ var EventPluginRegistry = {
       }
     }
     return null;
-  },
-
-  /**
+  }
+/**
    * Exposed for unit testing.
    * @private
    */
@@ -2979,21 +2931,18 @@ function hasDispatches(event) {
 var EventPluginUtils = {
   isEndish: isEndish,
   isMoveish: isMoveish,
-  isStartish: isStartish,
-
-  executeDirectDispatch: executeDirectDispatch,
+  isStartish: isStartish
+executeDirectDispatch: executeDirectDispatch,
   executeDispatchesInOrder: executeDispatchesInOrder,
   executeDispatchesInOrderStopAtTrue: executeDispatchesInOrderStopAtTrue,
-  hasDispatches: hasDispatches,
-
-  getNode: function (id) {
+  hasDispatches: hasDispatches
+getNode: function (id) {
     return injection.Mount.getNode(id);
   },
   getID: function (node) {
     return injection.Mount.getID(node);
-  },
-
-  injection: injection
+  }
+injection: injection
 };
 
 module.exports = EventPluginUtils;
@@ -3180,9 +3129,8 @@ assign(FallbackCompositionState.prototype, {
     this._root = null;
     this._startText = null;
     this._fallbackText = null;
-  },
-
-  /**
+  }
+/**
    * Get current text of input.
    *
    * @return {string}
@@ -3192,9 +3140,8 @@ assign(FallbackCompositionState.prototype, {
       return this._root.value;
     }
     return this._root[getTextContentAccessor()];
-  },
-
-  /**
+  }
+/**
    * Determine the differing substring between the initially stored
    * text content and the current content.
    *
@@ -3397,9 +3344,8 @@ var HTMLDOMPropertyConfig = {
     value: MUST_USE_PROPERTY | HAS_SIDE_EFFECTS,
     width: MUST_USE_ATTRIBUTE,
     wmode: MUST_USE_ATTRIBUTE,
-    wrap: null,
-
-    /**
+    wrap: null
+  /**
      * RDFa Properties
      */
     about: MUST_USE_ATTRIBUTE,
@@ -3410,9 +3356,8 @@ var HTMLDOMPropertyConfig = {
     property: MUST_USE_ATTRIBUTE,
     resource: MUST_USE_ATTRIBUTE,
     'typeof': MUST_USE_ATTRIBUTE,
-    vocab: MUST_USE_ATTRIBUTE,
-
-    /**
+    vocab: MUST_USE_ATTRIBUTE
+  /**
      * Non-standard Properties
      */
     // autoCapitalize and autoCorrect are supported in Mobile Safari for
@@ -3556,9 +3501,8 @@ var LinkedValueUtils = {
         process.env.NODE_ENV !== 'production' ? warning(false, 'Failed form propType: %s%s', error.message, addendum) : undefined;
       }
     }
-  },
-
-  /**
+  }
+/**
    * @param {object} inputProps Props for form component
    * @return {*} current value of the input either from value prop or link.
    */
@@ -3568,9 +3512,8 @@ var LinkedValueUtils = {
       return inputProps.valueLink.value;
     }
     return inputProps.value;
-  },
-
-  /**
+  }
+/**
    * @param {object} inputProps Props for form component
    * @return {*} current checked status of the input either from checked prop
    *             or link.
@@ -3581,9 +3524,8 @@ var LinkedValueUtils = {
       return inputProps.checkedLink.value;
     }
     return inputProps.checked;
-  },
-
-  /**
+  }
+/**
    * @param {object} inputProps Props for form component
    * @param {SyntheticEvent} event change event to handle
    */
@@ -3804,9 +3746,8 @@ assign(React, {
   // ReactDOM
   findDOMNode: deprecated('findDOMNode', 'ReactDOM', 'react-dom', ReactDOM, ReactDOM.findDOMNode),
   render: deprecated('render', 'ReactDOM', 'react-dom', ReactDOM, ReactDOM.render),
-  unmountComponentAtNode: deprecated('unmountComponentAtNode', 'ReactDOM', 'react-dom', ReactDOM, ReactDOM.unmountComponentAtNode),
-
-  // ReactDOMServer
+  unmountComponentAtNode: deprecated('unmountComponentAtNode', 'ReactDOM', 'react-dom', ReactDOM, ReactDOM.unmountComponentAtNode)
+// ReactDOMServer
   renderToString: deprecated('renderToString', 'ReactDOMServer', 'react-dom/server', ReactDOMServer, ReactDOMServer.renderToString),
   renderToStaticMarkup: deprecated('renderToStaticMarkup', 'ReactDOMServer', 'react-dom/server', ReactDOMServer, ReactDOMServer.renderToStaticMarkup)
 });
@@ -4035,9 +3976,8 @@ var ReactBrowserEventEmitter = assign({}, ReactEventEmitterMixin, {
   /**
    * Injectable event backend
    */
-  ReactEventListener: null,
-
-  injection: {
+  ReactEventListener: null
+injection: {
     /**
      * @param {object} ReactEventListener
      */
@@ -4045,9 +3985,8 @@ var ReactBrowserEventEmitter = assign({}, ReactEventEmitterMixin, {
       ReactEventListener.setHandleTopLevel(ReactBrowserEventEmitter.handleTopLevel);
       ReactBrowserEventEmitter.ReactEventListener = ReactEventListener;
     }
-  },
-
-  /**
+  }
+/**
    * Sets whether or not any created callbacks should be enabled.
    *
    * @param {boolean} enabled True if callbacks should be enabled.
@@ -4056,16 +3995,14 @@ var ReactBrowserEventEmitter = assign({}, ReactEventEmitterMixin, {
     if (ReactBrowserEventEmitter.ReactEventListener) {
       ReactBrowserEventEmitter.ReactEventListener.setEnabled(enabled);
     }
-  },
-
-  /**
+  }
+/**
    * @return {boolean} True if callbacks are enabled.
    */
   isEnabled: function () {
     return !!(ReactBrowserEventEmitter.ReactEventListener && ReactBrowserEventEmitter.ReactEventListener.isEnabled());
-  },
-
-  /**
+  }
+/**
    * We listen for bubbled touch events on the document object.
    *
    * Firefox v8.01 (and possibly others) exhibited strange behavior when
@@ -4134,17 +4071,14 @@ var ReactBrowserEventEmitter = assign({}, ReactEventEmitterMixin, {
         isListening[dependency] = true;
       }
     }
-  },
-
-  trapBubbledEvent: function (topLevelType, handlerBaseName, handle) {
+  }
+trapBubbledEvent: function (topLevelType, handlerBaseName, handle) {
     return ReactBrowserEventEmitter.ReactEventListener.trapBubbledEvent(topLevelType, handlerBaseName, handle);
-  },
-
-  trapCapturedEvent: function (topLevelType, handlerBaseName, handle) {
+  }
+trapCapturedEvent: function (topLevelType, handlerBaseName, handle) {
     return ReactBrowserEventEmitter.ReactEventListener.trapCapturedEvent(topLevelType, handlerBaseName, handle);
-  },
-
-  /**
+  }
+/**
    * Listens to window scroll and resize events. We cache scroll values so that
    * application code can access them without triggering reflows.
    *
@@ -4158,19 +4092,13 @@ var ReactBrowserEventEmitter = assign({}, ReactEventEmitterMixin, {
       ReactBrowserEventEmitter.ReactEventListener.monitorScrollValue(refresh);
       isMonitoringScrollValue = true;
     }
-  },
-
-  eventNameDispatchConfigs: EventPluginHub.eventNameDispatchConfigs,
-
-  registrationNameModules: EventPluginHub.registrationNameModules,
-
-  putListener: EventPluginHub.putListener,
-
-  getListener: EventPluginHub.getListener,
-
-  deleteListener: EventPluginHub.deleteListener,
-
-  deleteAllListeners: EventPluginHub.deleteAllListeners
+  }
+eventNameDispatchConfigs: EventPluginHub.eventNameDispatchConfigs
+registrationNameModules: EventPluginHub.registrationNameModules
+putListener: EventPluginHub.putListener
+getListener: EventPluginHub.getListener
+deleteListener: EventPluginHub.deleteListener
+deleteAllListeners: EventPluginHub.deleteAllListeners
 
 });
 
@@ -4235,9 +4163,8 @@ var ReactChildReconciler = {
     var childInstances = {};
     traverseAllChildren(nestedChildNodes, instantiateChild, childInstances);
     return childInstances;
-  },
-
-  /**
+  }
+/**
    * Updates the rendered children and returns a new set of children.
    *
    * @param {?object} prevChildren Previously initialized set of children.
@@ -4283,9 +4210,8 @@ var ReactChildReconciler = {
       }
     }
     return nextChildren;
-  },
-
-  /**
+  }
+/**
    * Unmounts all rendered children. This should be used to clean up children
    * when this component is unmounted.
    *
@@ -4584,42 +4510,37 @@ var ReactClassInterface = {
    * @type {array}
    * @optional
    */
-  mixins: SpecPolicy.DEFINE_MANY,
-
-  /**
+  mixins: SpecPolicy.DEFINE_MANY
+/**
    * An object containing properties and methods that should be defined on
    * the component's constructor instead of its prototype (static methods).
    *
    * @type {object}
    * @optional
    */
-  statics: SpecPolicy.DEFINE_MANY,
-
-  /**
+  statics: SpecPolicy.DEFINE_MANY
+/**
    * Definition of prop types for this component.
    *
    * @type {object}
    * @optional
    */
-  propTypes: SpecPolicy.DEFINE_MANY,
-
-  /**
+  propTypes: SpecPolicy.DEFINE_MANY
+/**
    * Definition of context types for this component.
    *
    * @type {object}
    * @optional
    */
-  contextTypes: SpecPolicy.DEFINE_MANY,
-
-  /**
+  contextTypes: SpecPolicy.DEFINE_MANY
+/**
    * Definition of context types this component sets for its children.
    *
    * @type {object}
    * @optional
    */
-  childContextTypes: SpecPolicy.DEFINE_MANY,
-
-  // ==== Definition methods ====
+  childContextTypes: SpecPolicy.DEFINE_MANY
+// ==== Definition methods ====
 
   /**
    * Invoked when the component is mounted. Values in the mapping will be set on
@@ -4631,9 +4552,8 @@ var ReactClassInterface = {
    * @return {object}
    * @optional
    */
-  getDefaultProps: SpecPolicy.DEFINE_MANY_MERGED,
-
-  /**
+  getDefaultProps: SpecPolicy.DEFINE_MANY_MERGED
+/**
    * Invoked once before the component is mounted. The return value will be used
    * as the initial value of `this.state`.
    *
@@ -4647,15 +4567,13 @@ var ReactClassInterface = {
    * @return {object}
    * @optional
    */
-  getInitialState: SpecPolicy.DEFINE_MANY_MERGED,
-
-  /**
+  getInitialState: SpecPolicy.DEFINE_MANY_MERGED
+/**
    * @return {object}
    * @optional
    */
-  getChildContext: SpecPolicy.DEFINE_MANY_MERGED,
-
-  /**
+  getChildContext: SpecPolicy.DEFINE_MANY_MERGED
+/**
    * Uses props from `this.props` and state from `this.state` to render the
    * structure of the component.
    *
@@ -4671,9 +4589,8 @@ var ReactClassInterface = {
    * @nosideeffects
    * @required
    */
-  render: SpecPolicy.DEFINE_ONCE,
-
-  // ==== Delegate methods ====
+  render: SpecPolicy.DEFINE_ONCE
+// ==== Delegate methods ====
 
   /**
    * Invoked when the component is initially created and about to be mounted.
@@ -4682,9 +4599,8 @@ var ReactClassInterface = {
    *
    * @optional
    */
-  componentWillMount: SpecPolicy.DEFINE_MANY,
-
-  /**
+  componentWillMount: SpecPolicy.DEFINE_MANY
+/**
    * Invoked when the component has been mounted and has a DOM representation.
    * However, there is no guarantee that the DOM node is in the document.
    *
@@ -4694,9 +4610,8 @@ var ReactClassInterface = {
    * @param {DOMElement} rootNode DOM element representing the component.
    * @optional
    */
-  componentDidMount: SpecPolicy.DEFINE_MANY,
-
-  /**
+  componentDidMount: SpecPolicy.DEFINE_MANY
+/**
    * Invoked before the component receives new props.
    *
    * Use this as an opportunity to react to a prop transition by updating the
@@ -4715,9 +4630,8 @@ var ReactClassInterface = {
    * @param {object} nextProps
    * @optional
    */
-  componentWillReceiveProps: SpecPolicy.DEFINE_MANY,
-
-  /**
+  componentWillReceiveProps: SpecPolicy.DEFINE_MANY
+/**
    * Invoked while deciding if the component should be updated as a result of
    * receiving new props, state and/or context.
    *
@@ -4737,9 +4651,8 @@ var ReactClassInterface = {
    * @return {boolean} True if the component should update.
    * @optional
    */
-  shouldComponentUpdate: SpecPolicy.DEFINE_ONCE,
-
-  /**
+  shouldComponentUpdate: SpecPolicy.DEFINE_ONCE
+/**
    * Invoked when the component is about to update due to a transition from
    * `this.props`, `this.state` and `this.context` to `nextProps`, `nextState`
    * and `nextContext`.
@@ -4754,9 +4667,8 @@ var ReactClassInterface = {
    * @param {ReactReconcileTransaction} transaction
    * @optional
    */
-  componentWillUpdate: SpecPolicy.DEFINE_MANY,
-
-  /**
+  componentWillUpdate: SpecPolicy.DEFINE_MANY
+/**
    * Invoked when the component's DOM representation has been updated.
    *
    * Use this as an opportunity to operate on the DOM when the component has
@@ -4768,9 +4680,8 @@ var ReactClassInterface = {
    * @param {DOMElement} rootNode DOM element representing the component.
    * @optional
    */
-  componentDidUpdate: SpecPolicy.DEFINE_MANY,
-
-  /**
+  componentDidUpdate: SpecPolicy.DEFINE_MANY
+/**
    * Invoked when the component is about to be removed from its parent and have
    * its DOM representation destroyed.
    *
@@ -4781,9 +4692,8 @@ var ReactClassInterface = {
    *
    * @optional
    */
-  componentWillUnmount: SpecPolicy.DEFINE_MANY,
-
-  // ==== Advanced methods ====
+  componentWillUnmount: SpecPolicy.DEFINE_MANY
+// ==== Advanced methods ====
 
   /**
    * Updates the component's currently mounted DOM representation.
@@ -5106,9 +5016,8 @@ var ReactClassMixin = {
     if (callback) {
       this.updater.enqueueCallback(this, callback);
     }
-  },
-
-  /**
+  }
+/**
    * Checks whether or not this composite component is mounted.
    * @return {boolean} True if mounted, false otherwise.
    * @protected
@@ -5116,9 +5025,8 @@ var ReactClassMixin = {
    */
   isMounted: function () {
     return this.updater.isMounted(this);
-  },
-
-  /**
+  }
+/**
    * Sets a subset of the props.
    *
    * @param {object} partialProps Subset of the next props.
@@ -5135,9 +5043,8 @@ var ReactClassMixin = {
     if (callback) {
       this.updater.enqueueCallback(this, callback);
     }
-  },
-
-  /**
+  }
+/**
    * Replace all the props.
    *
    * @param {object} newProps Subset of the next props.
@@ -5251,9 +5158,8 @@ var ReactClass = {
     }
 
     return Constructor;
-  },
-
-  injection: {
+  }
+injection: {
     injectMixin: function (mixin) {
       injectedMixins.push(mixin);
     }
@@ -5414,11 +5320,9 @@ var ReactMount = require('./ReactMount');
  */
 var ReactComponentBrowserEnvironment = {
 
-  processChildrenUpdates: ReactDOMIDOperations.dangerouslyProcessChildrenUpdates,
-
-  replaceNodeWithMarkupByID: ReactDOMIDOperations.dangerouslyReplaceNodeWithMarkupByID,
-
-  /**
+  processChildrenUpdates: ReactDOMIDOperations.dangerouslyProcessChildrenUpdates
+replaceNodeWithMarkupByID: ReactDOMIDOperations.dangerouslyReplaceNodeWithMarkupByID
+/**
    * If a particular environment requires that some resources be cleaned up,
    * specify this in the injected Mixin. In the DOM, we would likely want to
    * purge any cached node ID lookups.
@@ -5458,21 +5362,18 @@ var ReactComponentEnvironment = {
    * browser etc). Example: A browser system caches DOM nodes based on component
    * ID and must remove that cache entry when this instance is unmounted.
    */
-  unmountIDFromEnvironment: null,
-
-  /**
+  unmountIDFromEnvironment: null
+/**
    * Optionally injectable hook for swapping out mount images in the middle of
    * the tree.
    */
-  replaceNodeWithMarkupByID: null,
-
-  /**
+  replaceNodeWithMarkupByID: null
+/**
    * Optionally injectable hook for processing a queue of child updates. Will
    * later move into MultiChildComponents.
    */
-  processChildrenUpdates: null,
-
-  injection: {
+  processChildrenUpdates: null
+injection: {
     injectEnvironment: function (environment) {
       !!injected ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactCompositeComponent: injectEnvironment() can only be called once.') : invariant(false) : undefined;
       ReactComponentEnvironment.unmountIDFromEnvironment = environment.unmountIDFromEnvironment;
@@ -5601,9 +5502,8 @@ var ReactCompositeComponentMixin = {
 
     // See ReactUpdates and ReactUpdateQueue.
     this._pendingCallbacks = null;
-  },
-
-  /**
+  }
+/**
    * Initializes the component, renders markup, and registers event listeners.
    *
    * @param {string} rootID DOM ID of the root node.
@@ -5719,9 +5619,8 @@ var ReactCompositeComponentMixin = {
     }
 
     return markup;
-  },
-
-  /**
+  }
+/**
    * Releases any resources allocated by `mountComponent`.
    *
    * @final
@@ -5763,9 +5662,8 @@ var ReactCompositeComponentMixin = {
     // TODO: inst.props = null;
     // TODO: inst.state = null;
     // TODO: inst.context = null;
-  },
-
-  /**
+  }
+/**
    * Filters the context object to only contain keys specified in
    * `contextTypes`
    *
@@ -5785,9 +5683,8 @@ var ReactCompositeComponentMixin = {
       maskedContext[contextName] = context[contextName];
     }
     return maskedContext;
-  },
-
-  /**
+  }
+/**
    * Filters the context object to only contain keys specified in
    * `contextTypes`, and asserts that they are valid.
    *
@@ -5804,9 +5701,8 @@ var ReactCompositeComponentMixin = {
       }
     }
     return maskedContext;
-  },
-
-  /**
+  }
+/**
    * @param {object} currentContext
    * @return {object}
    * @private
@@ -5826,9 +5722,8 @@ var ReactCompositeComponentMixin = {
       return assign({}, currentContext, childContext);
     }
     return currentContext;
-  },
-
-  /**
+  }
+/**
    * Processes props by setting default values for unspecified props and
    * asserting that the props are valid. Does not mutate its argument; returns
    * a new props object with defaults merged in.
@@ -5845,9 +5740,8 @@ var ReactCompositeComponentMixin = {
       }
     }
     return newProps;
-  },
-
-  /**
+  }
+/**
    * Assert that the props are valid
    *
    * @param {object} propTypes Map of prop name to a ReactPropType
@@ -5885,18 +5779,16 @@ var ReactCompositeComponentMixin = {
         }
       }
     }
-  },
-
-  receiveComponent: function (nextElement, transaction, nextContext) {
+  }
+receiveComponent: function (nextElement, transaction, nextContext) {
     var prevElement = this._currentElement;
     var prevContext = this._context;
 
     this._pendingElement = null;
 
     this.updateComponent(transaction, prevElement, nextElement, prevContext, nextContext);
-  },
-
-  /**
+  }
+/**
    * If any of `_pendingElement`, `_pendingStateQueue`, or `_pendingForceUpdate`
    * is set, update the component.
    *
@@ -5911,9 +5803,8 @@ var ReactCompositeComponentMixin = {
     if (this._pendingStateQueue !== null || this._pendingForceUpdate) {
       this.updateComponent(transaction, this._currentElement, this._currentElement, this._context, this._context);
     }
-  },
-
-  /**
+  }
+/**
    * Perform an update to a mounted component. The componentWillReceiveProps and
    * shouldComponentUpdate methods are called, then (assuming the update isn't
    * skipped) the remaining update lifecycle methods are called and the DOM
@@ -5971,9 +5862,8 @@ var ReactCompositeComponentMixin = {
       inst.state = nextState;
       inst.context = nextContext;
     }
-  },
-
-  _processPendingState: function (props, context) {
+  }
+_processPendingState: function (props, context) {
     var inst = this._instance;
     var queue = this._pendingStateQueue;
     var replace = this._pendingReplaceState;
@@ -5995,9 +5885,8 @@ var ReactCompositeComponentMixin = {
     }
 
     return nextState;
-  },
-
-  /**
+  }
+/**
    * Merges new props and state, notifies delegate methods of update and
    * performs update.
    *
@@ -6037,9 +5926,8 @@ var ReactCompositeComponentMixin = {
     if (hasComponentDidUpdate) {
       transaction.getReactMountReady().enqueue(inst.componentDidUpdate.bind(inst, prevProps, prevState, prevContext), inst);
     }
-  },
-
-  /**
+  }
+/**
    * Call the component's `render` method and update the DOM accordingly.
    *
    * @param {ReactReconcileTransaction} transaction
@@ -6061,16 +5949,14 @@ var ReactCompositeComponentMixin = {
       var nextMarkup = ReactReconciler.mountComponent(this._renderedComponent, thisID, transaction, this._processChildContext(context));
       this._replaceNodeWithMarkupByID(prevComponentID, nextMarkup);
     }
-  },
-
-  /**
+  }
+/**
    * @protected
    */
   _replaceNodeWithMarkupByID: function (prevComponentID, nextMarkup) {
     ReactComponentEnvironment.replaceNodeWithMarkupByID(prevComponentID, nextMarkup);
-  },
-
-  /**
+  }
+/**
    * @protected
    */
   _renderValidatedComponentWithoutOwnerOrContext: function () {
@@ -6086,9 +5972,8 @@ var ReactCompositeComponentMixin = {
     }
 
     return renderedComponent;
-  },
-
-  /**
+  }
+/**
    * @private
    */
   _renderValidatedComponent: function () {
@@ -6103,9 +5988,8 @@ var ReactCompositeComponentMixin = {
     // TODO: An `isValidNode` function would probably be more appropriate
     renderedComponent === null || renderedComponent === false || ReactElement.isValidElement(renderedComponent)) ? process.env.NODE_ENV !== 'production' ? invariant(false, '%s.render(): A valid ReactComponent must be returned. You may have ' + 'returned undefined, an array or some other invalid object.', this.getName() || 'ReactCompositeComponent') : invariant(false) : undefined;
     return renderedComponent;
-  },
-
-  /**
+  }
+/**
    * Lazily allocates the refs object and stores `component` as `ref`.
    *
    * @param {string} ref Reference name.
@@ -6123,9 +6007,8 @@ var ReactCompositeComponentMixin = {
     }
     var refs = inst.refs === emptyObject ? inst.refs = {} : inst.refs;
     refs[ref] = publicComponentInstance;
-  },
-
-  /**
+  }
+/**
    * Detaches a reference name.
    *
    * @param {string} ref Name to dereference.
@@ -6135,9 +6018,8 @@ var ReactCompositeComponentMixin = {
   detachRef: function (ref) {
     var refs = this.getPublicInstance().refs;
     delete refs[ref];
-  },
-
-  /**
+  }
+/**
    * Get a text description of the component that can be used to identify it
    * in error messages.
    * @return {string} The name or null.
@@ -6147,9 +6029,8 @@ var ReactCompositeComponentMixin = {
     var type = this._currentElement.type;
     var constructor = this._instance && this._instance.constructor;
     return type.displayName || constructor && constructor.displayName || type.name || constructor && constructor.name || null;
-  },
-
-  /**
+  }
+/**
    * Get the publicly accessible representation of this component - i.e. what
    * is exposed by refs and returned by render. Can be null for stateless
    * components.
@@ -6163,9 +6044,8 @@ var ReactCompositeComponentMixin = {
       return null;
     }
     return inst;
-  },
-
-  // Stub
+  }
+// Stub
   _instantiateReactComponent: null
 
 };
@@ -6255,9 +6135,8 @@ var React = {
   findDOMNode: findDOMNode,
   render: render,
   unmountComponentAtNode: ReactMount.unmountComponentAtNode,
-  version: ReactVersion,
-
-  /* eslint-disable camelcase */
+  version: ReactVersion
+/* eslint-disable camelcase */
   unstable_batchedUpdates: ReactUpdates.batchedUpdates,
   unstable_renderSubtreeIntoContainer: renderSubtreeIntoContainer
 };
@@ -6295,9 +6174,8 @@ if (process.env.NODE_ENV !== 'production') {
 
     var expectedFeatures = [
     // shims
-    Array.isArray, Array.prototype.every, Array.prototype.forEach, Array.prototype.indexOf, Array.prototype.map, Date.now, Function.prototype.bind, Object.keys, String.prototype.split, String.prototype.trim,
-
-    // shams
+    Array.isArray, Array.prototype.every, Array.prototype.forEach, Array.prototype.indexOf, Array.prototype.map, Date.now, Function.prototype.bind, Object.keys, String.prototype.split, String.prototype.trim
+  // shams
     Object.create, Object.freeze];
 
     for (var i = 0; i < expectedFeatures.length; i++) {
@@ -6331,9 +6209,8 @@ var mouseListenerNames = {
   onDoubleClick: true,
   onMouseDown: true,
   onMouseMove: true,
-  onMouseUp: true,
-
-  onClickCapture: true,
+  onMouseUp: true
+onClickCapture: true,
   onDoubleClickCapture: true,
   onMouseDownCapture: true,
   onMouseMoveCapture: true,
@@ -6768,9 +6645,8 @@ ReactDOMComponent.Mixin = {
 
   construct: function (element) {
     this._currentElement = element;
-  },
-
-  /**
+  }
+/**
    * Generates root tag markup then recurses. This method has side effects and
    * is not idempotent.
    *
@@ -6865,9 +6741,8 @@ ReactDOMComponent.Mixin = {
     }
 
     return mountImage;
-  },
-
-  /**
+  }
+/**
    * Creates markup for the open tag and all attributes.
    *
    * This method has side effects because events get registered.
@@ -6928,9 +6803,8 @@ ReactDOMComponent.Mixin = {
 
     var markupForID = DOMPropertyOperations.createMarkupForID(this._rootNodeID);
     return ret + ' ' + markupForID;
-  },
-
-  /**
+  }
+/**
    * Creates markup for the content between the tags.
    *
    * @private
@@ -6974,9 +6848,8 @@ ReactDOMComponent.Mixin = {
     } else {
       return ret;
     }
-  },
-
-  _createInitialChildren: function (transaction, props, context, el) {
+  }
+_createInitialChildren: function (transaction, props, context, el) {
     // Intentional use of != to avoid catching zero/false.
     var innerHTML = props.dangerouslySetInnerHTML;
     if (innerHTML != null) {
@@ -6996,9 +6869,8 @@ ReactDOMComponent.Mixin = {
         }
       }
     }
-  },
-
-  /**
+  }
+/**
    * Receives a next element and updates the component.
    *
    * @internal
@@ -7010,9 +6882,8 @@ ReactDOMComponent.Mixin = {
     var prevElement = this._currentElement;
     this._currentElement = nextElement;
     this.updateComponent(transaction, prevElement, nextElement, context);
-  },
-
-  /**
+  }
+/**
    * Updates a native DOM component after it has already been allocated and
    * attached to the DOM. Reconciles the root DOM node, then recurses.
    *
@@ -7075,9 +6946,8 @@ ReactDOMComponent.Mixin = {
       // reconciliation
       transaction.getReactMountReady().enqueue(postUpdateSelectWrapper, this);
     }
-  },
-
-  /**
+  }
+/**
    * Reconciles the properties by detecting differences in property values and
    * updating the DOM as necessary. This function is probably the single most
    * critical path for performance optimization.
@@ -7194,9 +7064,8 @@ ReactDOMComponent.Mixin = {
       }
       CSSPropertyOperations.setValueForStyles(node, styleUpdates);
     }
-  },
-
-  /**
+  }
+/**
    * Reconciles the children with the various properties that affect the
    * children content.
    *
@@ -7237,9 +7106,8 @@ ReactDOMComponent.Mixin = {
     } else if (nextChildren != null) {
       this.updateChildren(nextChildren, transaction, context);
     }
-  },
-
-  /**
+  }
+/**
    * Destroys all event registrations for this instance. Does not remove from
    * the DOM. That must be done by the parent.
    *
@@ -7285,9 +7153,8 @@ ReactDOMComponent.Mixin = {
       node._reactInternalComponent = null;
       this._nodeWithLegacyProperties = null;
     }
-  },
-
-  getPublicInstance: function () {
+  }
+getPublicInstance: function () {
     if (!this._nodeWithLegacyProperties) {
       var node = ReactMount.getNode(this._rootNodeID);
 
@@ -7482,9 +7349,8 @@ var ReactDOMFactories = mapObject({
   ul: 'ul',
   'var': 'var',
   video: 'video',
-  wbr: 'wbr',
-
-  // SVG
+  wbr: 'wbr'
+// SVG
   circle: 'circle',
   clipPath: 'clipPath',
   defs: 'defs',
@@ -7589,9 +7455,8 @@ var ReactDOMIDOperations = {
     } else {
       DOMPropertyOperations.deleteValueForProperty(node, name);
     }
-  },
-
-  /**
+  }
+/**
    * Replaces a DOM node that exists in the document with markup.
    *
    * @param {string} id ID of child to be replaced.
@@ -7602,9 +7467,8 @@ var ReactDOMIDOperations = {
   dangerouslyReplaceNodeWithMarkupByID: function (id, markup) {
     var node = ReactMount.getNode(id);
     DOMChildrenOperations.dangerouslyReplaceNodeWithMarkup(node, markup);
-  },
-
-  /**
+  }
+/**
    * Updates a component's children by processing a series of updates.
    *
    * @param {array<object>} updates List of update configurations.
@@ -7689,9 +7553,8 @@ var ReactDOMInput = {
     });
 
     return nativeProps;
-  },
-
-  mountWrapper: function (inst, props) {
+  }
+mountWrapper: function (inst, props) {
     if (process.env.NODE_ENV !== 'production') {
       LinkedValueUtils.checkPropTypes('input', props, inst._currentElement._owner);
     }
@@ -7702,18 +7565,15 @@ var ReactDOMInput = {
       initialValue: defaultValue != null ? defaultValue : null,
       onChange: _handleChange.bind(inst)
     };
-  },
-
-  mountReadyWrapper: function (inst) {
+  }
+mountReadyWrapper: function (inst) {
     // Can't be in mountWrapper or else server rendering leaks.
     instancesByReactID[inst._rootNodeID] = inst;
-  },
-
-  unmountWrapper: function (inst) {
+  }
+unmountWrapper: function (inst) {
     delete instancesByReactID[inst._rootNodeID];
-  },
-
-  updateWrapper: function (inst) {
+  }
+updateWrapper: function (inst) {
     var props = inst._currentElement.props;
 
     // TODO: Shouldn't this be getChecked(props)?
@@ -7839,9 +7699,8 @@ var ReactDOMOption = {
     }
 
     inst._wrapperState = { selected: selected };
-  },
-
-  getNativeProps: function (inst, props, context) {
+  }
+getNativeProps: function (inst, props, context) {
     var nativeProps = assign({ selected: undefined, children: undefined }, props);
 
     // Read state only from initial mount because <select> updates value
@@ -8000,16 +7859,14 @@ function updateOptions(inst, multiple, propValue) {
  * selected.
  */
 var ReactDOMSelect = {
-  valueContextKey: valueContextKey,
-
-  getNativeProps: function (inst, props, context) {
+  valueContextKey: valueContextKey
+getNativeProps: function (inst, props, context) {
     return assign({}, props, {
       onChange: inst._wrapperState.onChange,
       value: undefined
     });
-  },
-
-  mountWrapper: function (inst, props) {
+  }
+mountWrapper: function (inst, props) {
     if (process.env.NODE_ENV !== 'production') {
       checkSelectPropTypes(inst, props);
     }
@@ -8021,17 +7878,15 @@ var ReactDOMSelect = {
       onChange: _handleChange.bind(inst),
       wasMultiple: Boolean(props.multiple)
     };
-  },
-
-  processChildContext: function (inst, props, context) {
+  }
+processChildContext: function (inst, props, context) {
     // Pass down initial value so initial generated markup has correct
     // `selected` attributes
     var childContext = assign({}, context);
     childContext[valueContextKey] = inst._wrapperState.initialValue;
     return childContext;
-  },
-
-  postUpdateWrapper: function (inst) {
+  }
+postUpdateWrapper: function (inst) {
     var props = inst._currentElement.props;
 
     // After the initial mount, we control selected-ness manually so don't pass
@@ -8272,9 +8127,8 @@ var ReactDOMSelection = {
   /**
    * @param {DOMElement} node
    */
-  getOffsets: useIEOffsets ? getIEOffsets : getModernOffsets,
-
-  /**
+  getOffsets: useIEOffsets ? getIEOffsets : getModernOffsets
+/**
    * @param {DOMElement|DOMTextNode} node
    * @param {object} offsets
    */
@@ -8368,9 +8222,8 @@ assign(ReactDOMTextComponent.prototype, {
     // Properties
     this._rootNodeID = null;
     this._mountIndex = 0;
-  },
-
-  /**
+  }
+/**
    * Creates the markup for this text node. This node is not intended to have
    * any features besides containing text content.
    *
@@ -8407,9 +8260,8 @@ assign(ReactDOMTextComponent.prototype, {
 
       return '<span ' + DOMPropertyOperations.createMarkupForID(rootID) + '>' + escapedText + '</span>';
     }
-  },
-
-  /**
+  }
+/**
    * Updates this component by updating the text content.
    *
    * @param {ReactText} nextText The next text content
@@ -8429,9 +8281,8 @@ assign(ReactDOMTextComponent.prototype, {
         DOMChildrenOperations.updateTextContent(node, nextStringText);
       }
     }
-  },
-
-  unmountComponent: function () {
+  }
+unmountComponent: function () {
     ReactComponentBrowserEnvironment.unmountIDFromEnvironment(this._rootNodeID);
   }
 
@@ -8499,9 +8350,8 @@ var ReactDOMTextarea = {
     });
 
     return nativeProps;
-  },
-
-  mountWrapper: function (inst, props) {
+  }
+mountWrapper: function (inst, props) {
     if (process.env.NODE_ENV !== 'production') {
       LinkedValueUtils.checkPropTypes('textarea', props, inst._currentElement._owner);
     }
@@ -8534,9 +8384,8 @@ var ReactDOMTextarea = {
       initialValue: '' + (value != null ? value : defaultValue),
       onChange: _handleChange.bind(inst)
     };
-  },
-
-  updateWrapper: function (inst) {
+  }
+updateWrapper: function (inst) {
     var props = inst._currentElement.props;
     var value = LinkedValueUtils.getValue(props);
     if (value != null) {
@@ -8604,9 +8453,8 @@ assign(ReactDefaultBatchingStrategyTransaction.prototype, Transaction.Mixin, {
 var transaction = new ReactDefaultBatchingStrategyTransaction();
 
 var ReactDefaultBatchingStrategy = {
-  isBatchingUpdates: false,
-
-  /**
+  isBatchingUpdates: false
+/**
    * Call the provided function in a context within which calls to `setState`
    * and friends are batched such that components aren't updated unnecessarily.
    */
@@ -8759,26 +8607,22 @@ function addValue(obj, key, val) {
 var ReactDefaultPerf = {
   _allMeasurements: [], // last item in the list is the current one
   _mountStack: [0],
-  _injected: false,
-
-  start: function () {
+  _injected: false
+start: function () {
     if (!ReactDefaultPerf._injected) {
       ReactPerf.injection.injectMeasure(ReactDefaultPerf.measure);
     }
 
     ReactDefaultPerf._allMeasurements.length = 0;
     ReactPerf.enableMeasure = true;
-  },
-
-  stop: function () {
+  }
+stop: function () {
     ReactPerf.enableMeasure = false;
-  },
-
-  getLastMeasurements: function () {
+  }
+getLastMeasurements: function () {
     return ReactDefaultPerf._allMeasurements;
-  },
-
-  printExclusive: function (measurements) {
+  }
+printExclusive: function (measurements) {
     measurements = measurements || ReactDefaultPerf._allMeasurements;
     var summary = ReactDefaultPerfAnalysis.getExclusiveSummary(measurements);
     console.table(summary.map(function (item) {
@@ -8794,9 +8638,8 @@ var ReactDefaultPerf = {
     }));
     // TODO: ReactDefaultPerfAnalysis.getTotalTime() does not return the correct
     // number.
-  },
-
-  printInclusive: function (measurements) {
+  }
+printInclusive: function (measurements) {
     measurements = measurements || ReactDefaultPerf._allMeasurements;
     var summary = ReactDefaultPerfAnalysis.getInclusiveSummary(measurements);
     console.table(summary.map(function (item) {
@@ -8807,9 +8650,8 @@ var ReactDefaultPerf = {
       };
     }));
     console.log('Total time:', ReactDefaultPerfAnalysis.getTotalTime(measurements).toFixed(2) + ' ms');
-  },
-
-  getMeasurementsSummaryMap: function (measurements) {
+  }
+getMeasurementsSummaryMap: function (measurements) {
     var summary = ReactDefaultPerfAnalysis.getInclusiveSummary(measurements, true);
     return summary.map(function (item) {
       return {
@@ -8818,15 +8660,13 @@ var ReactDefaultPerf = {
         'Instances': item.count
       };
     });
-  },
-
-  printWasted: function (measurements) {
+  }
+printWasted: function (measurements) {
     measurements = measurements || ReactDefaultPerf._allMeasurements;
     console.table(ReactDefaultPerf.getMeasurementsSummaryMap(measurements));
     console.log('Total time:', ReactDefaultPerfAnalysis.getTotalTime(measurements).toFixed(2) + ' ms');
-  },
-
-  printDOM: function (measurements) {
+  }
+printDOM: function (measurements) {
     measurements = measurements || ReactDefaultPerf._allMeasurements;
     var summary = ReactDefaultPerfAnalysis.getDOMSummary(measurements);
     console.table(summary.map(function (item) {
@@ -8837,9 +8677,8 @@ var ReactDefaultPerf = {
       return result;
     }));
     console.log('Total time:', ReactDefaultPerfAnalysis.getTotalTime(measurements).toFixed(2) + ' ms');
-  },
-
-  _recordWrite: function (id, fnName, totalTime, args) {
+  }
+_recordWrite: function (id, fnName, totalTime, args) {
     // TODO: totalTime isn't that useful since it doesn't count paints/reflows
     var writes = ReactDefaultPerf._allMeasurements[ReactDefaultPerf._allMeasurements.length - 1].writes;
     writes[id] = writes[id] || [];
@@ -8848,9 +8687,8 @@ var ReactDefaultPerf = {
       time: totalTime,
       args: args
     });
-  },
-
-  measure: function (moduleName, fnName, func) {
+  }
+measure: function (moduleName, fnName, func) {
     return function () {
       for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
         args[_key] = arguments[_key];
@@ -9218,15 +9056,13 @@ var RESERVED_PROPS = {
 var ReactElement = function (type, key, ref, self, source, owner, props) {
   var element = {
     // This tag allow us to uniquely identify this as a React Element
-    $$typeof: REACT_ELEMENT_TYPE,
-
-    // Built-in properties that belong on the element
+    $$typeof: REACT_ELEMENT_TYPE
+  // Built-in properties that belong on the element
     type: type,
     key: key,
     ref: ref,
-    props: props,
-
-    // Record the component responsible for creating this element.
+    props: props
+  // Record the component responsible for creating this element.
     _owner: owner
   };
 
@@ -9663,9 +9499,8 @@ var ReactElementValidator = {
     validatePropTypes(element);
 
     return element;
-  },
-
-  createFactory: function (type) {
+  }
+createFactory: function (type) {
     var validatedFactory = ReactElementValidator.createElement.bind(null, type);
     // Legacy hook TODO: Warn if this is accessed
     validatedFactory.type = type;
@@ -9686,9 +9521,8 @@ var ReactElementValidator = {
     }
 
     return validatedFactory;
-  },
-
-  cloneElement: function (element, props, children) {
+  }
+cloneElement: function (element, props, children) {
     var newElement = ReactElement.cloneElement.apply(this, arguments);
     for (var i = 2; i < arguments.length; i++) {
       validateChildKeys(arguments[i], newElement.type);
@@ -9845,15 +9679,13 @@ function invokeGuardedCallback(name, func, a, b) {
 }
 
 var ReactErrorUtils = {
-  invokeGuardedCallback: invokeGuardedCallback,
-
-  /**
+  invokeGuardedCallback: invokeGuardedCallback
+/**
    * Invoked by ReactTestUtils.Simulate so that any errors thrown by the event
    * handler are sure to be rethrown by rethrowCaughtError.
    */
-  invokeGuardedCallbackWithCatch: invokeGuardedCallback,
-
-  /**
+  invokeGuardedCallbackWithCatch: invokeGuardedCallback
+/**
    * During execution of guarded functions we will capture the first error which
    * we will rethrow to be handled by the top level error handler.
    */
@@ -10065,23 +9897,18 @@ function scrollValueMonitor(cb) {
 
 var ReactEventListener = {
   _enabled: true,
-  _handleTopLevel: null,
-
-  WINDOW_HANDLE: ExecutionEnvironment.canUseDOM ? window : null,
-
-  setHandleTopLevel: function (handleTopLevel) {
+  _handleTopLevel: null
+WINDOW_HANDLE: ExecutionEnvironment.canUseDOM ? window : null
+setHandleTopLevel: function (handleTopLevel) {
     ReactEventListener._handleTopLevel = handleTopLevel;
-  },
-
-  setEnabled: function (enabled) {
+  }
+setEnabled: function (enabled) {
     ReactEventListener._enabled = !!enabled;
-  },
-
-  isEnabled: function () {
+  }
+isEnabled: function () {
     return ReactEventListener._enabled;
-  },
-
-  /**
+  }
+/**
    * Traps top-level events by using event bubbling.
    *
    * @param {string} topLevelType Record from `EventConstants`.
@@ -10097,9 +9924,8 @@ var ReactEventListener = {
       return null;
     }
     return EventListener.listen(element, handlerBaseName, ReactEventListener.dispatchEvent.bind(null, topLevelType));
-  },
-
-  /**
+  }
+/**
    * Traps a top-level event by using event capturing.
    *
    * @param {string} topLevelType Record from `EventConstants`.
@@ -10115,14 +9941,12 @@ var ReactEventListener = {
       return null;
     }
     return EventListener.capture(element, handlerBaseName, ReactEventListener.dispatchEvent.bind(null, topLevelType));
-  },
-
-  monitorScrollValue: function (refresh) {
+  }
+monitorScrollValue: function (refresh) {
     var callback = scrollValueMonitor.bind(null, refresh);
     EventListener.listen(window, 'scroll', callback);
-  },
-
-  dispatchEvent: function (topLevelType, nativeEvent) {
+  }
+dispatchEvent: function (topLevelType, nativeEvent) {
     if (!ReactEventListener._enabled) {
       return;
     }
@@ -10213,17 +10037,15 @@ var ReactInputSelection = {
   hasSelectionCapabilities: function (elem) {
     var nodeName = elem && elem.nodeName && elem.nodeName.toLowerCase();
     return nodeName && (nodeName === 'input' && elem.type === 'text' || nodeName === 'textarea' || elem.contentEditable === 'true');
-  },
-
-  getSelectionInformation: function () {
+  }
+getSelectionInformation: function () {
     var focusedElem = getActiveElement();
     return {
       focusedElem: focusedElem,
       selectionRange: ReactInputSelection.hasSelectionCapabilities(focusedElem) ? ReactInputSelection.getSelection(focusedElem) : null
     };
-  },
-
-  /**
+  }
+/**
    * @restoreSelection: If any selection information was potentially lost,
    * restore it. This is useful when performing operations that could remove dom
    * nodes and place them back in, resulting in focus being lost.
@@ -10238,9 +10060,8 @@ var ReactInputSelection = {
       }
       focusNode(priorFocusedElem);
     }
-  },
-
-  /**
+  }
+/**
    * @getSelection: Gets the selection bounds of a focused textarea, input or
    * contentEditable node.
    * -@input: Look up selection bounds of this input
@@ -10272,9 +10093,8 @@ var ReactInputSelection = {
     }
 
     return selection || { start: 0, end: 0 };
-  },
-
-  /**
+  }
+/**
    * @setSelection: Sets the selection bounds of a textarea or input and focuses
    * the input.
    * -@input     Set selection bounds of this input or textarea
@@ -10495,9 +10315,8 @@ var ReactInstanceHandles = {
    */
   createReactRootID: function () {
     return getReactRootIDString(ReactRootIndex.createReactRootIndex());
-  },
-
-  /**
+  }
+/**
    * Constructs a React ID by joining a root ID with a name.
    *
    * @param {string} rootID Root ID of a parent component.
@@ -10507,9 +10326,8 @@ var ReactInstanceHandles = {
    */
   createReactID: function (rootID, name) {
     return rootID + name;
-  },
-
-  /**
+  }
+/**
    * Gets the DOM ID of the React component that is the root of the tree that
    * contains the React component with the supplied DOM ID.
    *
@@ -10523,9 +10341,8 @@ var ReactInstanceHandles = {
       return index > -1 ? id.substr(0, index) : id;
     }
     return null;
-  },
-
-  /**
+  }
+/**
    * Traverses the ID hierarchy and invokes the supplied `cb` on any IDs that
    * should would receive a `mouseEnter` or `mouseLeave` event.
    *
@@ -10547,9 +10364,8 @@ var ReactInstanceHandles = {
     if (ancestorID !== enterID) {
       traverseParentPath(ancestorID, enterID, cb, downArg, true, false);
     }
-  },
-
-  /**
+  }
+/**
    * Simulates the traversal of a two-phase, capture/bubble event dispatch.
    *
    * NOTE: This traversal happens on IDs without touching the DOM.
@@ -10564,9 +10380,8 @@ var ReactInstanceHandles = {
       traverseParentPath('', targetID, cb, arg, true, false);
       traverseParentPath(targetID, '', cb, arg, false, true);
     }
-  },
-
-  /**
+  }
+/**
    * Same as `traverseTwoPhase` but skips the `targetID`.
    */
   traverseTwoPhaseSkipTarget: function (targetID, cb, arg) {
@@ -10574,9 +10389,8 @@ var ReactInstanceHandles = {
       traverseParentPath('', targetID, cb, arg, true, true);
       traverseParentPath(targetID, '', cb, arg, true, true);
     }
-  },
-
-  /**
+  }
+/**
    * Traverse a node ID, calling the supplied `cb` for each ancestor ID. For
    * example, passing `.0.$row-0.1` would result in `cb` getting called
    * with `.0`, `.0.$row-0`, and `.0.$row-0.1`.
@@ -10590,19 +10404,15 @@ var ReactInstanceHandles = {
    */
   traverseAncestors: function (targetID, cb, arg) {
     traverseParentPath('', targetID, cb, arg, true, false);
-  },
-
-  getFirstCommonAncestorID: getFirstCommonAncestorID,
-
-  /**
+  }
+getFirstCommonAncestorID: getFirstCommonAncestorID
+/**
    * Exposed for unit testing.
    * @private
    */
-  _getNextDescendantID: getNextDescendantID,
-
-  isAncestorIDOf: isAncestorIDOf,
-
-  SEPARATOR: SEPARATOR
+  _getNextDescendantID: getNextDescendantID
+isAncestorIDOf: isAncestorIDOf
+SEPARATOR: SEPARATOR
 
 };
 
@@ -10640,17 +10450,14 @@ var ReactInstanceMap = {
    */
   remove: function (key) {
     key._reactInternalInstance = undefined;
-  },
-
-  get: function (key) {
+  }
+get: function (key) {
     return key._reactInternalInstance;
-  },
-
-  has: function (key) {
+  }
+has: function (key) {
     return key._reactInternalInstance !== undefined;
-  },
-
-  set: function (key, value) {
+  }
+set: function (key, value) {
     key._reactInternalInstance = value;
   }
 
@@ -10704,15 +10511,12 @@ var React = {
     count: ReactChildren.count,
     toArray: ReactChildren.toArray,
     only: onlyChild
-  },
-
-  Component: ReactComponent,
-
-  createElement: createElement,
+  }
+Component: ReactComponent
+createElement: createElement,
   cloneElement: cloneElement,
-  isValidElement: ReactElement.isValidElement,
-
-  // Classic
+  isValidElement: ReactElement.isValidElement
+// Classic
 
   PropTypes: ReactPropTypes,
   createClass: ReactClass.createClass,
@@ -10720,15 +10524,12 @@ var React = {
   createMixin: function (mixin) {
     // Currently a noop. Will be used to validate and trace mixins.
     return mixin;
-  },
-
-  // This looks DOM specific but these are actually isomorphic helpers
+  }
+// This looks DOM specific but these are actually isomorphic helpers
   // since they are just generating DOM strings.
-  DOM: ReactDOMFactories,
-
-  version: ReactVersion,
-
-  // Hook for JSX spread, don't use this for anything else.
+  DOM: ReactDOMFactories
+version: ReactVersion
+// Hook for JSX spread, don't use this for anything else.
   __spread: assign
 };
 
@@ -10754,9 +10555,8 @@ var adler32 = require('./adler32');
 var TAG_END = /\/?>/;
 
 var ReactMarkupChecksum = {
-  CHECKSUM_ATTR_NAME: 'data-react-checksum',
-
-  /**
+  CHECKSUM_ATTR_NAME: 'data-react-checksum'
+/**
    * @param {string} markup Markup string
    * @return {string} Markup string with checksum attribute attached
    */
@@ -10765,9 +10565,8 @@ var ReactMarkupChecksum = {
 
     // Add checksum (handle both parent tags and self-closing tags)
     return markup.replace(TAG_END, ' ' + ReactMarkupChecksum.CHECKSUM_ATTR_NAME + '="' + checksum + '"$&');
-  },
-
-  /**
+  }
+/**
    * @param {string} markup to use
    * @param {DOMElement} element root React element
    * @returns {boolean} whether or not the markup is the same
@@ -11181,12 +10980,10 @@ TopLevelWrapper.prototype.render = function () {
  */
 var ReactMount = {
 
-  TopLevelWrapper: TopLevelWrapper,
-
-  /** Exposed for debugging purposes **/
-  _instancesByReactRootID: instancesByReactRootID,
-
-  /**
+  TopLevelWrapper: TopLevelWrapper
+/** Exposed for debugging purposes **/
+  _instancesByReactRootID: instancesByReactRootID
+/**
    * This is a hook provided to support rendering React components while
    * ensuring that the apparent scroll position of its `container` does not
    * change.
@@ -11196,9 +10993,8 @@ var ReactMount = {
    */
   scrollMonitor: function (container, renderCallback) {
     renderCallback();
-  },
-
-  /**
+  }
+/**
    * Take a component that's already mounted into the DOM and replace its props
    * @param {ReactComponent} prevComponent component instance already in the DOM
    * @param {ReactElement} nextElement component instance to render
@@ -11219,9 +11015,8 @@ var ReactMount = {
     }
 
     return prevComponent;
-  },
-
-  /**
+  }
+/**
    * Register a component into the instance map and starts scroll value
    * monitoring
    * @param {ReactComponent} nextComponent component instance to render
@@ -11236,9 +11031,8 @@ var ReactMount = {
     var reactRootID = ReactMount.registerContainer(container);
     instancesByReactRootID[reactRootID] = nextComponent;
     return reactRootID;
-  },
-
-  /**
+  }
+/**
    * Render a new component into the DOM.
    * @param {ReactElement} nextElement element to render
    * @param {DOMElement} container container to render into
@@ -11266,9 +11060,8 @@ var ReactMount = {
     }
 
     return componentInstance;
-  },
-
-  /**
+  }
+/**
    * Renders a React component into the DOM in the supplied `container`.
    *
    * If the React component was previously rendered into `container`, this will
@@ -11284,9 +11077,8 @@ var ReactMount = {
   renderSubtreeIntoContainer: function (parentComponent, nextElement, container, callback) {
     !(parentComponent != null && parentComponent._reactInternalInstance != null) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'parentComponent must be a valid React Component') : invariant(false) : undefined;
     return ReactMount._renderSubtreeIntoContainer(parentComponent, nextElement, container, callback);
-  },
-
-  _renderSubtreeIntoContainer: function (parentComponent, nextElement, container, callback) {
+  }
+_renderSubtreeIntoContainer: function (parentComponent, nextElement, container, callback) {
     !ReactElement.isValidElement(nextElement) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactDOM.render(): Invalid component element.%s', typeof nextElement === 'string' ? ' Instead of passing an element string, make sure to instantiate ' + 'it by passing it to React.createElement.' : typeof nextElement === 'function' ? ' Instead of passing a component class, make sure to instantiate ' + 'it by passing it to React.createElement.' :
     // Check if it quacks like an element
     nextElement != null && nextElement.props !== undefined ? ' This may be caused by unintentionally loading two independent ' + 'copies of React.' : '') : invariant(false) : undefined;
@@ -11337,9 +11129,8 @@ var ReactMount = {
       callback.call(component);
     }
     return component;
-  },
-
-  /**
+  }
+/**
    * Renders a React component into the DOM in the supplied `container`.
    *
    * If the React component was previously rendered into `container`, this will
@@ -11353,9 +11144,8 @@ var ReactMount = {
    */
   render: function (nextElement, container, callback) {
     return ReactMount._renderSubtreeIntoContainer(null, nextElement, container, callback);
-  },
-
-  /**
+  }
+/**
    * Registers a container node into which React components will be rendered.
    * This also creates the "reactRoot" ID that will be assigned to the element
    * rendered within.
@@ -11375,9 +11165,8 @@ var ReactMount = {
     }
     containersByReactRootID[reactRootID] = container;
     return reactRootID;
-  },
-
-  /**
+  }
+/**
    * Unmounts and destroys the React component rendered in the `container`.
    *
    * @param {DOMElement} container DOM element containing a React component.
@@ -11417,9 +11206,8 @@ var ReactMount = {
       delete rootElementsByReactRootID[reactRootID];
     }
     return true;
-  },
-
-  /**
+  }
+/**
    * Finds the container DOM element that contains React component to which the
    * supplied DOM `id` belongs.
    *
@@ -11451,9 +11239,8 @@ var ReactMount = {
     }
 
     return container;
-  },
-
-  /**
+  }
+/**
    * Finds an element rendered by React with the supplied ID.
    *
    * @param {string} id ID of a DOM node in the React component.
@@ -11462,9 +11249,8 @@ var ReactMount = {
   findReactNodeByID: function (id) {
     var reactRoot = ReactMount.findReactContainerForID(id);
     return ReactMount.findComponentRoot(reactRoot, id);
-  },
-
-  /**
+  }
+/**
    * Traverses up the ancestors of the supplied node to find a node that is a
    * DOM representation of a React component rendered by this copy of React.
    *
@@ -11474,9 +11260,8 @@ var ReactMount = {
    */
   getFirstReactDOM: function (node) {
     return findFirstReactDOMImpl(node);
-  },
-
-  /**
+  }
+/**
    * Finds a node with the supplied `targetID` inside of the supplied
    * `ancestorNode`.  Exploits the ID naming scheme to perform the search
    * quickly.
@@ -11547,9 +11332,8 @@ var ReactMount = {
     firstChildren.length = 0;
 
     !false ? process.env.NODE_ENV !== 'production' ? invariant(false, 'findComponentRoot(..., %s): Unable to find element. This probably ' + 'means the DOM was unexpectedly mutated (e.g., by the browser), ' + 'usually due to forgetting a <tbody> when using tables, nesting tags ' + 'like <form>, <p>, or <a>, or using non-SVG elements in an <svg> ' + 'parent. ' + 'Try inspecting the child nodes of the element with React ID `%s`.', targetID, ReactMount.getID(ancestorNode)) : invariant(false) : undefined;
-  },
-
-  _mountImageIntoNode: function (markup, container, shouldReuseMarkup, transaction) {
+  }
+_mountImageIntoNode: function (markup, container, shouldReuseMarkup, transaction) {
     !(container && (container.nodeType === ELEMENT_NODE_TYPE || container.nodeType === DOC_NODE_TYPE || container.nodeType === DOCUMENT_FRAGMENT_NODE_TYPE)) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'mountComponentIntoNode(...): Target container is not valid.') : invariant(false) : undefined;
 
     if (shouldReuseMarkup) {
@@ -11604,27 +11388,19 @@ var ReactMount = {
     } else {
       setInnerHTML(container, markup);
     }
-  },
-
-  ownerDocumentContextKey: ownerDocumentContextKey,
-
-  /**
+  }
+ownerDocumentContextKey: ownerDocumentContextKey
+/**
    * React ID utilities.
    */
 
-  getReactRootID: getReactRootID,
-
-  getID: getID,
-
-  setID: setID,
-
-  getNode: getNode,
-
-  getNodeFromInstance: getNodeFromInstance,
-
-  isValid: isValid,
-
-  purgeID: purgeID
+  getReactRootID: getReactRootID
+getID: getID
+setID: setID
+getNode: getNode
+getNodeFromInstance: getNodeFromInstance
+isValid: isValid
+purgeID: purgeID
 };
 
 ReactPerf.measureMethods(ReactMount, 'ReactMount', {
@@ -11840,9 +11616,8 @@ var ReactMultiChild = {
         }
       }
       return ReactChildReconciler.instantiateChildren(nestedChildren, transaction, context);
-    },
-
-    _reconcilerUpdateChildren: function (prevChildren, nextNestedChildrenElements, transaction, context) {
+    }
+  _reconcilerUpdateChildren: function (prevChildren, nextNestedChildrenElements, transaction, context) {
       var nextChildren;
       if (process.env.NODE_ENV !== 'production') {
         if (this._currentElement) {
@@ -11857,9 +11632,8 @@ var ReactMultiChild = {
       }
       nextChildren = flattenChildren(nextNestedChildrenElements);
       return ReactChildReconciler.updateChildren(prevChildren, nextChildren, transaction, context);
-    },
-
-    /**
+    }
+  /**
      * Generates a "mount image" for each of the supplied children. In the case
      * of `ReactDOMComponent`, a mount image is a string of markup.
      *
@@ -11883,9 +11657,8 @@ var ReactMultiChild = {
         }
       }
       return mountImages;
-    },
-
-    /**
+    }
+  /**
      * Replaces any rendered children with a text content string.
      *
      * @param {string} nextContent String of content.
@@ -11917,9 +11690,8 @@ var ReactMultiChild = {
           }
         }
       }
-    },
-
-    /**
+    }
+  /**
      * Replaces any rendered children with a markup string.
      *
      * @param {string} nextMarkup String of markup.
@@ -11949,9 +11721,8 @@ var ReactMultiChild = {
           }
         }
       }
-    },
-
-    /**
+    }
+  /**
      * Updates the rendered children with new children.
      *
      * @param {?object} nextNestedChildrenElements Nested child element maps.
@@ -11974,9 +11745,8 @@ var ReactMultiChild = {
           }
         }
       }
-    },
-
-    /**
+    }
+  /**
      * Improve performance by isolating this hot code path from the try/catch
      * block in `updateChildren`.
      *
@@ -12024,9 +11794,8 @@ var ReactMultiChild = {
           this._unmountChild(prevChildren[name]);
         }
       }
-    },
-
-    /**
+    }
+  /**
      * Unmounts all rendered children. This should be used to clean up children
      * when this component is unmounted.
      *
@@ -12036,9 +11805,8 @@ var ReactMultiChild = {
       var renderedChildren = this._renderedChildren;
       ReactChildReconciler.unmountChildren(renderedChildren);
       this._renderedChildren = null;
-    },
-
-    /**
+    }
+  /**
      * Moves a child component to the supplied index.
      *
      * @param {ReactComponent} child Component to move.
@@ -12053,9 +11821,8 @@ var ReactMultiChild = {
       if (child._mountIndex < lastIndex) {
         enqueueMove(this._rootNodeID, child._mountIndex, toIndex);
       }
-    },
-
-    /**
+    }
+  /**
      * Creates a child component.
      *
      * @param {ReactComponent} child Component to create.
@@ -12064,9 +11831,8 @@ var ReactMultiChild = {
      */
     createChild: function (child, mountImage) {
       enqueueInsertMarkup(this._rootNodeID, mountImage, child._mountIndex);
-    },
-
-    /**
+    }
+  /**
      * Removes a child component.
      *
      * @param {ReactComponent} child Child to remove.
@@ -12074,9 +11840,8 @@ var ReactMultiChild = {
      */
     removeChild: function (child) {
       enqueueRemove(this._rootNodeID, child._mountIndex);
-    },
-
-    /**
+    }
+  /**
      * Sets this text content string.
      *
      * @param {string} textContent Text content to set.
@@ -12084,9 +11849,8 @@ var ReactMultiChild = {
      */
     setTextContent: function (textContent) {
       enqueueTextContent(this._rootNodeID, textContent);
-    },
-
-    /**
+    }
+  /**
      * Sets this markup string.
      *
      * @param {string} markup Markup to set.
@@ -12094,9 +11858,8 @@ var ReactMultiChild = {
      */
     setMarkup: function (markup) {
       enqueueSetMarkup(this._rootNodeID, markup);
-    },
-
-    /**
+    }
+  /**
      * Mounts a child with the supplied name.
      *
      * NOTE: This is part of `updateChildren` and is here for readability.
@@ -12113,9 +11876,8 @@ var ReactMultiChild = {
       var mountImage = ReactReconciler.mountComponent(child, rootID, transaction, context);
       child._mountIndex = index;
       this.createChild(child, mountImage);
-    },
-
-    /**
+    }
+  /**
      * Unmounts a rendered child.
      *
      * NOTE: This is part of `updateChildren` and is here for readability.
@@ -12303,9 +12065,8 @@ var ReactNoopUpdateQueue = {
    */
   isMounted: function (publicInstance) {
     return false;
-  },
-
-  /**
+  }
+/**
    * Enqueue a callback that will be executed after all the pending updates
    * have processed.
    *
@@ -12313,9 +12074,8 @@ var ReactNoopUpdateQueue = {
    * @param {?function} callback Called after state is updated.
    * @internal
    */
-  enqueueCallback: function (publicInstance, callback) {},
-
-  /**
+  enqueueCallback: function (publicInstance, callback) {}
+/**
    * Forces an update. This should only be invoked when it is known with
    * certainty that we are **not** in a DOM transaction.
    *
@@ -12330,9 +12090,8 @@ var ReactNoopUpdateQueue = {
    */
   enqueueForceUpdate: function (publicInstance) {
     warnTDZ(publicInstance, 'forceUpdate');
-  },
-
-  /**
+  }
+/**
    * Replaces all of the state. Always use this or `setState` to mutate state.
    * You should treat `this.state` as immutable.
    *
@@ -12345,9 +12104,8 @@ var ReactNoopUpdateQueue = {
    */
   enqueueReplaceState: function (publicInstance, completeState) {
     warnTDZ(publicInstance, 'replaceState');
-  },
-
-  /**
+  }
+/**
    * Sets a subset of the state. This only exists because _pendingState is
    * internal. This provides a merging strategy that is not available to deep
    * properties which is confusing. TODO: Expose pendingState or don't use it
@@ -12359,9 +12117,8 @@ var ReactNoopUpdateQueue = {
    */
   enqueueSetState: function (publicInstance, partialState) {
     warnTDZ(publicInstance, 'setState');
-  },
-
-  /**
+  }
+/**
    * Sets a subset of the props.
    *
    * @param {ReactClass} publicInstance The instance that should rerender.
@@ -12370,9 +12127,8 @@ var ReactNoopUpdateQueue = {
    */
   enqueueSetProps: function (publicInstance, partialProps) {
     warnTDZ(publicInstance, 'setProps');
-  },
-
-  /**
+  }
+/**
    * Replaces all of the props.
    *
    * @param {ReactClass} publicInstance The instance that should rerender.
@@ -12444,9 +12200,8 @@ var ReactOwner = {
    */
   isValidOwner: function (object) {
     return !!(object && typeof object.attachRef === 'function' && typeof object.detachRef === 'function');
-  },
-
-  /**
+  }
+/**
    * Adds a component by ref to an owner component.
    *
    * @param {ReactComponent} component Component to reference.
@@ -12458,9 +12213,8 @@ var ReactOwner = {
   addComponentAsRefTo: function (component, ref, owner) {
     !ReactOwner.isValidOwner(owner) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'addComponentAsRefTo(...): Only a ReactOwner can have refs. You might ' + 'be adding a ref to a component that was not created inside a component\'s ' + '`render` method, or you have multiple copies of React loaded ' + '(details: https://fb.me/react-refs-must-have-owner).') : invariant(false) : undefined;
     owner.attachRef(ref, component);
-  },
-
-  /**
+  }
+/**
    * Removes a component by ref from an owner component.
    *
    * @param {ReactComponent} component Component to dereference.
@@ -12508,15 +12262,13 @@ var ReactPerf = {
    * Boolean to enable/disable measurement. Set to false by default to prevent
    * accidental logging and perf loss.
    */
-  enableMeasure: false,
-
-  /**
+  enableMeasure: false
+/**
    * Holds onto the measure function in use. By default, don't measure
    * anything, but we'll override this if we inject a measure function.
    */
-  storedMeasure: _noMeasure,
-
-  /**
+  storedMeasure: _noMeasure
+/**
    * @param {object} object
    * @param {string} objectName
    * @param {object<string>} methodNames
@@ -12530,9 +12282,8 @@ var ReactPerf = {
         object[key] = ReactPerf.measure(objectName, methodNames[key], object[key]);
       }
     }
-  },
-
-  /**
+  }
+/**
    * Use this to wrap methods you want to measure. Zero overhead in production.
    *
    * @param {string} objName
@@ -12556,9 +12307,8 @@ var ReactPerf = {
       return wrapper;
     }
     return func;
-  },
-
-  injection: {
+  }
+injection: {
     /**
      * @param {function} measure
      */
@@ -12709,9 +12459,8 @@ var ReactPropTypes = {
   func: createPrimitiveTypeChecker('function'),
   number: createPrimitiveTypeChecker('number'),
   object: createPrimitiveTypeChecker('object'),
-  string: createPrimitiveTypeChecker('string'),
-
-  any: createAnyTypeChecker(),
+  string: createPrimitiveTypeChecker('string')
+any: createAnyTypeChecker(),
   arrayOf: createArrayOfTypeChecker,
   element: createElementTypeChecker(),
   instanceOf: createInstanceTypeChecker,
@@ -13044,9 +12793,8 @@ var EVENT_SUPPRESSION = {
     var currentlyEnabled = ReactBrowserEventEmitter.isEnabled();
     ReactBrowserEventEmitter.setEnabled(false);
     return currentlyEnabled;
-  },
-
-  /**
+  }
+/**
    * @param {boolean} previouslyEnabled Enabled status of
    *   `ReactBrowserEventEmitter` before the reconciliation occurred. `close`
    *   restores the previous value.
@@ -13066,9 +12814,8 @@ var ON_DOM_READY_QUEUEING = {
    */
   initialize: function () {
     this.reactMountReady.reset();
-  },
-
-  /**
+  }
+/**
    * After DOM is flushed, invoke all registered `onDOMReady` callbacks.
    */
   close: function () {
@@ -13119,16 +12866,14 @@ var Mixin = {
    */
   getTransactionWrappers: function () {
     return TRANSACTION_WRAPPERS;
-  },
-
-  /**
+  }
+/**
    * @return {object} The queue to collect `onDOMReady` callbacks with.
    */
   getReactMountReady: function () {
     return this.reactMountReady;
-  },
-
-  /**
+  }
+/**
    * `PooledClass` looks for this, and will invoke this before allowing this
    * instance to be reused.
    */
@@ -13185,9 +12930,8 @@ var ReactReconciler = {
       transaction.getReactMountReady().enqueue(attachRefs, internalInstance);
     }
     return markup;
-  },
-
-  /**
+  }
+/**
    * Releases any resources allocated by `mountComponent`.
    *
    * @final
@@ -13196,9 +12940,8 @@ var ReactReconciler = {
   unmountComponent: function (internalInstance) {
     ReactRef.detachRefs(internalInstance, internalInstance._currentElement);
     internalInstance.unmountComponent();
-  },
-
-  /**
+  }
+/**
    * Update a component using a new element.
    *
    * @param {ReactComponent} internalInstance
@@ -13235,9 +12978,8 @@ var ReactReconciler = {
     if (refsChanged && internalInstance._currentElement && internalInstance._currentElement.ref != null) {
       transaction.getReactMountReady().enqueue(attachRefs, internalInstance);
     }
-  },
-
-  /**
+  }
+/**
    * Flush any dirty changes in a component.
    *
    * @param {ReactComponent} internalInstance
@@ -13503,9 +13245,8 @@ var ON_DOM_READY_QUEUEING = {
    */
   initialize: function () {
     this.reactMountReady.reset();
-  },
-
-  close: emptyFunction
+  }
+close: emptyFunction
 };
 
 /**
@@ -13535,16 +13276,14 @@ var Mixin = {
    */
   getTransactionWrappers: function () {
     return TRANSACTION_WRAPPERS;
-  },
-
-  /**
+  }
+/**
    * @return {object} The queue to collect `onDOMReady` callbacks with.
    */
   getReactMountReady: function () {
     return this.reactMountReady;
-  },
-
-  /**
+  }
+/**
    * `PooledClass` looks for this, and will invoke this before allowing this
    * instance to be reused.
    */
@@ -13636,9 +13375,8 @@ var ReactUpdateQueue = {
     } else {
       return false;
     }
-  },
-
-  /**
+  }
+/**
    * Enqueue a callback that will be executed after all the pending updates
    * have processed.
    *
@@ -13669,9 +13407,8 @@ var ReactUpdateQueue = {
     // favor of getInitialState. Alternatively, we can disallow
     // componentWillMount during server-side rendering.
     enqueueUpdate(internalInstance);
-  },
-
-  enqueueCallbackInternal: function (internalInstance, callback) {
+  }
+enqueueCallbackInternal: function (internalInstance, callback) {
     !(typeof callback === 'function') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'enqueueCallback(...): You called `setProps`, `replaceProps`, ' + '`setState`, `replaceState`, or `forceUpdate` with a callback that ' + 'isn\'t callable.') : invariant(false) : undefined;
     if (internalInstance._pendingCallbacks) {
       internalInstance._pendingCallbacks.push(callback);
@@ -13679,9 +13416,8 @@ var ReactUpdateQueue = {
       internalInstance._pendingCallbacks = [callback];
     }
     enqueueUpdate(internalInstance);
-  },
-
-  /**
+  }
+/**
    * Forces an update. This should only be invoked when it is known with
    * certainty that we are **not** in a DOM transaction.
    *
@@ -13704,9 +13440,8 @@ var ReactUpdateQueue = {
     internalInstance._pendingForceUpdate = true;
 
     enqueueUpdate(internalInstance);
-  },
-
-  /**
+  }
+/**
    * Replaces all of the state. Always use this or `setState` to mutate state.
    * You should treat `this.state` as immutable.
    *
@@ -13728,9 +13463,8 @@ var ReactUpdateQueue = {
     internalInstance._pendingReplaceState = true;
 
     enqueueUpdate(internalInstance);
-  },
-
-  /**
+  }
+/**
    * Sets a subset of the state. This only exists because _pendingState is
    * internal. This provides a merging strategy that is not available to deep
    * properties which is confusing. TODO: Expose pendingState or don't use it
@@ -13751,9 +13485,8 @@ var ReactUpdateQueue = {
     queue.push(partialState);
 
     enqueueUpdate(internalInstance);
-  },
-
-  /**
+  }
+/**
    * Sets a subset of the props.
    *
    * @param {ReactClass} publicInstance The instance that should rerender.
@@ -13766,9 +13499,8 @@ var ReactUpdateQueue = {
       return;
     }
     ReactUpdateQueue.enqueueSetPropsInternal(internalInstance, partialProps);
-  },
-
-  enqueueSetPropsInternal: function (internalInstance, partialProps) {
+  }
+enqueueSetPropsInternal: function (internalInstance, partialProps) {
     var topLevelWrapper = internalInstance._topLevelWrapper;
     !topLevelWrapper ? process.env.NODE_ENV !== 'production' ? invariant(false, 'setProps(...): You called `setProps` on a ' + 'component with a parent. This is an anti-pattern since props will ' + 'get reactively updated when rendered. Instead, change the owner\'s ' + '`render` method to pass the correct value as props to the component ' + 'where it is created.') : invariant(false) : undefined;
 
@@ -13780,9 +13512,8 @@ var ReactUpdateQueue = {
     topLevelWrapper._pendingElement = ReactElement.cloneAndReplaceProps(wrapElement, ReactElement.cloneAndReplaceProps(element, props));
 
     enqueueUpdate(topLevelWrapper);
-  },
-
-  /**
+  }
+/**
    * Replaces all of the props.
    *
    * @param {ReactClass} publicInstance The instance that should rerender.
@@ -13795,9 +13526,8 @@ var ReactUpdateQueue = {
       return;
     }
     ReactUpdateQueue.enqueueReplacePropsInternal(internalInstance, props);
-  },
-
-  enqueueReplacePropsInternal: function (internalInstance, props) {
+  }
+enqueueReplacePropsInternal: function (internalInstance, props) {
     var topLevelWrapper = internalInstance._topLevelWrapper;
     !topLevelWrapper ? process.env.NODE_ENV !== 'production' ? invariant(false, 'replaceProps(...): You called `replaceProps` on a ' + 'component with a parent. This is an anti-pattern since props will ' + 'get reactively updated when rendered. Instead, change the owner\'s ' + '`render` method to pass the correct value as props to the component ' + 'where it is created.') : invariant(false) : undefined;
 
@@ -13808,9 +13538,8 @@ var ReactUpdateQueue = {
     topLevelWrapper._pendingElement = ReactElement.cloneAndReplaceProps(wrapElement, ReactElement.cloneAndReplaceProps(element, props));
 
     enqueueUpdate(topLevelWrapper);
-  },
-
-  enqueueElementInternal: function (internalInstance, newElement) {
+  }
+enqueueElementInternal: function (internalInstance, newElement) {
     internalInstance._pendingElement = newElement;
     enqueueUpdate(internalInstance);
   }
@@ -13894,17 +13623,15 @@ function ReactUpdatesFlushTransaction() {
 assign(ReactUpdatesFlushTransaction.prototype, Transaction.Mixin, {
   getTransactionWrappers: function () {
     return TRANSACTION_WRAPPERS;
-  },
-
-  destructor: function () {
+  }
+destructor: function () {
     this.dirtyComponentsLength = null;
     CallbackQueue.release(this.callbackQueue);
     this.callbackQueue = null;
     ReactUpdates.ReactReconcileTransaction.release(this.reconcileTransaction);
     this.reconcileTransaction = null;
-  },
-
-  perform: function (method, scope, a) {
+  }
+perform: function (method, scope, a) {
     // Essentially calls `this.reconcileTransaction.perform(method, scope, a)`
     // with this transaction's wrappers around it.
     return Transaction.Mixin.perform.call(this, this.reconcileTransaction.perform, this.reconcileTransaction, method, scope, a);
@@ -14018,9 +13745,8 @@ var ReactUpdatesInjection = {
   injectReconcileTransaction: function (ReconcileTransaction) {
     !ReconcileTransaction ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactUpdates: must provide a reconcile transaction class') : invariant(false) : undefined;
     ReactUpdates.ReactReconcileTransaction = ReconcileTransaction;
-  },
-
-  injectBatchingStrategy: function (_batchingStrategy) {
+  }
+injectBatchingStrategy: function (_batchingStrategy) {
     !_batchingStrategy ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactUpdates: must provide a batching strategy') : invariant(false) : undefined;
     !(typeof _batchingStrategy.batchedUpdates === 'function') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactUpdates: must provide a batchedUpdates() function') : invariant(false) : undefined;
     !(typeof _batchingStrategy.isBatchingUpdates === 'boolean') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactUpdates: must provide an isBatchingUpdates boolean attribute') : invariant(false) : undefined;
@@ -14035,9 +13761,8 @@ var ReactUpdates = {
    *
    * @internal
    */
-  ReactReconcileTransaction: null,
-
-  batchedUpdates: batchedUpdates,
+  ReactReconcileTransaction: null
+batchedUpdates: batchedUpdates,
   enqueueUpdate: enqueueUpdate,
   flushBatchedUpdates: flushBatchedUpdates,
   injection: ReactUpdatesInjection,
@@ -14322,9 +14047,8 @@ function constructSelectEvent(nativeEvent, nativeEventTarget) {
  */
 var SelectEventPlugin = {
 
-  eventTypes: eventTypes,
-
-  /**
+  eventTypes: eventTypes
+/**
    * @param {string} topLevelType Record from `EventConstants`.
    * @param {DOMEventTarget} topLevelTarget The listening component root node.
    * @param {string} topLevelTargetID ID of `topLevelTarget`.
@@ -14382,9 +14106,8 @@ var SelectEventPlugin = {
     }
 
     return null;
-  },
-
-  didPutListener: function (id, registrationName, listener) {
+  }
+didPutListener: function (id, registrationName, listener) {
     if (registrationName === ON_SELECT_KEY) {
       hasListener = true;
     }
@@ -14874,9 +14597,8 @@ var onClickListeners = {};
 
 var SimpleEventPlugin = {
 
-  eventTypes: eventTypes,
-
-  /**
+  eventTypes: eventTypes
+/**
    * @param {string} topLevelType Record from `EventConstants`.
    * @param {DOMEventTarget} topLevelTarget The listening component root node.
    * @param {string} topLevelTargetID ID of `topLevelTarget`.
@@ -14986,9 +14708,8 @@ var SimpleEventPlugin = {
     var event = EventConstructor.getPooled(dispatchConfig, topLevelTargetID, nativeEvent, nativeEventTarget);
     EventPropagators.accumulateTwoPhaseDispatches(event);
     return event;
-  },
-
-  didPutListener: function (id, registrationName, listener) {
+  }
+didPutListener: function (id, registrationName, listener) {
     // Mobile Safari does not fire properly bubble click events on
     // non-interactive elements, which means delegated click listeners do not
     // fire. The workaround for this bug involves attaching an empty click
@@ -14999,9 +14720,8 @@ var SimpleEventPlugin = {
         onClickListeners[id] = EventListener.listen(node, 'click', emptyFunction);
       }
     }
-  },
-
-  willDeleteListener: function (id, registrationName) {
+  }
+willDeleteListener: function (id, registrationName) {
     if (registrationName === ON_CLICK_KEY) {
       onClickListeners[id].remove();
       delete onClickListeners[id];
@@ -15236,9 +14956,8 @@ assign(SyntheticEvent.prototype, {
       event.returnValue = false;
     }
     this.isDefaultPrevented = emptyFunction.thatReturnsTrue;
-  },
-
-  stopPropagation: function () {
+  }
+stopPropagation: function () {
     var event = this.nativeEvent;
     if (process.env.NODE_ENV !== 'production') {
       process.env.NODE_ENV !== 'production' ? warning(event, 'This synthetic event is reused for performance reasons. If you\'re ' + 'seeing this, you\'re calling `stopPropagation` on a ' + 'released/nullified synthetic event. This is a no-op. See ' + 'https://fb.me/react-event-pooling for more information.') : undefined;
@@ -15253,25 +14972,22 @@ assign(SyntheticEvent.prototype, {
       event.cancelBubble = true;
     }
     this.isPropagationStopped = emptyFunction.thatReturnsTrue;
-  },
-
-  /**
+  }
+/**
    * We release all dispatched `SyntheticEvent`s after each event loop, adding
    * them back into the pool. This allows a way to hold onto a reference that
    * won't be added back into the pool.
    */
   persist: function () {
     this.isPersistent = emptyFunction.thatReturnsTrue;
-  },
-
-  /**
+  }
+/**
    * Checks if this event should be released back into the pool.
    *
    * @return {boolean} True if this should not be released, false otherwise.
    */
-  isPersistent: emptyFunction.thatReturnsFalse,
-
-  /**
+  isPersistent: emptyFunction.thatReturnsFalse
+/**
    * `PooledClass` looks for `destructor` on each instance it releases.
    */
   destructor: function () {
@@ -15692,9 +15408,8 @@ var WheelEventInterface = {
     // Fallback to `wheelDelta` for IE<9 and normalize (down is positive).
     'wheelDelta' in event ? -event.wheelDelta : 0;
   },
-  deltaZ: null,
-
-  // Browsers without "deltaMode" is reporting in raw wheel delta where one
+  deltaZ: null
+// Browsers without "deltaMode" is reporting in raw wheel delta where one
   // notch on the scroll is always +/- 120, roughly equivalent to pixels.
   // A good approximation of DOM_DELTA_LINE (1) is 5% of viewport size or
   // ~40 pixels, for DOM_DELTA_SCREEN (2) it is 87.5% of viewport size.
@@ -15808,21 +15523,17 @@ var Mixin = {
       this.wrapperInitData = [];
     }
     this._isInTransaction = false;
-  },
-
-  _isInTransaction: false,
-
-  /**
+  }
+_isInTransaction: false
+/**
    * @abstract
    * @return {Array<TransactionWrapper>} Array of transaction wrappers.
    */
-  getTransactionWrappers: null,
-
-  isInTransaction: function () {
+  getTransactionWrappers: null
+isInTransaction: function () {
     return !!this._isInTransaction;
-  },
-
-  /**
+  }
+/**
    * Executes the function within a safety window. Use this for the top level
    * methods that result in large amounts of computation/mutations that would
    * need to be safety checked. The optional arguments helps prevent the need
@@ -15871,9 +15582,8 @@ var Mixin = {
       }
     }
     return ret;
-  },
-
-  initializeAll: function (startIndex) {
+  }
+initializeAll: function (startIndex) {
     var transactionWrappers = this.transactionWrappers;
     for (var i = startIndex; i < transactionWrappers.length; i++) {
       var wrapper = transactionWrappers[i];
@@ -15895,9 +15605,8 @@ var Mixin = {
         }
       }
     }
-  },
-
-  /**
+  }
+/**
    * Invokes each of `this.transactionWrappers.close[i]` functions, passing into
    * them the respective return values of `this.transactionWrappers.init[i]`
    * (`close`rs that correspond to initializers that failed will not be
@@ -15937,9 +15646,8 @@ var Mixin = {
 
 var Transaction = {
 
-  Mixin: Mixin,
-
-  /**
+  Mixin: Mixin
+/**
    * Token to look for to determine if an error occurred.
    */
   OBSERVED_ERROR: {}
@@ -15965,11 +15673,9 @@ module.exports = Transaction;
 
 var ViewportMetrics = {
 
-  currentScrollLeft: 0,
-
-  currentScrollTop: 0,
-
-  refreshScrollValues: function (scrollPosition) {
+  currentScrollLeft: 0
+currentScrollTop: 0
+refreshScrollValues: function (scrollPosition) {
     ViewportMetrics.currentScrollLeft = scrollPosition.x;
     ViewportMetrics.currentScrollTop = scrollPosition.y;
   }
@@ -17468,7 +17174,7 @@ if (process.env.NODE_ENV !== 'production') {
   // Note: this does not catch all invalid nesting, nor does it try to (as it's
   // not clear what practical benefit doing so provides); instead, we warn only
   // for cases where the parser will give a parse tree differing from what React
-  // intended. For example, <b><div></div></b> is invalid but we don't warn
+  // intended. For example, <b><div/></b> is invalid but we don't warn
   // because it still parses correctly; we do warn for other cases like nested
   // <p> tags where the beginning of the second element implicitly closes the
   // first, causing a confusing mess.
@@ -17477,9 +17183,8 @@ if (process.env.NODE_ENV !== 'production') {
   var specialTags = ['address', 'applet', 'area', 'article', 'aside', 'base', 'basefont', 'bgsound', 'blockquote', 'body', 'br', 'button', 'caption', 'center', 'col', 'colgroup', 'dd', 'details', 'dir', 'div', 'dl', 'dt', 'embed', 'fieldset', 'figcaption', 'figure', 'footer', 'form', 'frame', 'frameset', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'head', 'header', 'hgroup', 'hr', 'html', 'iframe', 'img', 'input', 'isindex', 'li', 'link', 'listing', 'main', 'marquee', 'menu', 'menuitem', 'meta', 'nav', 'noembed', 'noframes', 'noscript', 'object', 'ol', 'p', 'param', 'plaintext', 'pre', 'script', 'section', 'select', 'source', 'style', 'summary', 'table', 'tbody', 'td', 'template', 'textarea', 'tfoot', 'th', 'thead', 'title', 'tr', 'track', 'ul', 'wbr', 'xmp'];
 
   // https://html.spec.whatwg.org/multipage/syntax.html#has-an-element-in-scope
-  var inScopeTags = ['applet', 'caption', 'html', 'table', 'td', 'th', 'marquee', 'object', 'template',
-
-  // https://html.spec.whatwg.org/multipage/syntax.html#html-integration-point
+  var inScopeTags = ['applet', 'caption', 'html', 'table', 'td', 'th', 'marquee', 'object', 'template'
+// https://html.spec.whatwg.org/multipage/syntax.html#html-integration-point
   // TODO: Distinguish by namespace here -- for <title>, including it here
   // errs on the side of fewer warnings
   'foreignObject', 'desc', 'title'];
@@ -17491,15 +17196,13 @@ if (process.env.NODE_ENV !== 'production') {
   var impliedEndTags = ['dd', 'dt', 'li', 'option', 'optgroup', 'p', 'rp', 'rt'];
 
   var emptyAncestorInfo = {
-    parentTag: null,
-
-    formTag: null,
+    parentTag: null
+  formTag: null,
     aTagInScope: null,
     buttonTagInScope: null,
     nobrTagInScope: null,
-    pTagInButtonScope: null,
-
-    listItemTagAutoclosing: null,
+    pTagInButtonScope: null
+  listItemTagAutoclosing: null,
     dlItemTagAutoclosing: null
   };
 
@@ -17861,9 +17564,8 @@ var EventListener = {
         }
       };
     }
-  },
-
-  /**
+  }
+/**
    * Listen to DOM events during the capture phase.
    *
    * @param {DOMEventTarget} target DOM element to register listener on.
@@ -17887,9 +17589,8 @@ var EventListener = {
         remove: emptyFunction
       };
     }
-  },
-
-  registerDefault: function () {}
+  }
+registerDefault: function () {}
 };
 
 module.exports = EventListener;
@@ -17919,15 +17620,11 @@ var canUseDOM = !!(typeof window !== 'undefined' && window.document && window.do
  */
 var ExecutionEnvironment = {
 
-  canUseDOM: canUseDOM,
-
-  canUseWorkers: typeof Worker !== 'undefined',
-
-  canUseEventListeners: canUseDOM && !!(window.addEventListener || window.attachEvent),
-
-  canUseViewport: canUseDOM && !!window.screen,
-
-  isInWorker: !canUseDOM // For now, this is true - might change in the future.
+  canUseDOM: canUseDOM
+canUseWorkers: typeof Worker !== 'undefined'
+canUseEventListeners: canUseDOM && !!(window.addEventListener || window.attachEvent)
+canUseViewport: canUseDOM && !!window.screen
+isInWorker: !canUseDOM // For now, this is true - might change in the future.
 
 };
 
@@ -18404,24 +18101,20 @@ var trWrap = [3, '<table><tbody><tr>', '</tr></tbody></table>'];
 var svgWrap = [1, '<svg xmlns="http://www.w3.org/2000/svg">', '</svg>'];
 
 var markupWrap = {
-  '*': [1, '?<div>', '</div>'],
-
-  'area': [1, '<map>', '</map>'],
+  '*': [1, '?<div>', '</div>']
+'area': [1, '<map>', '</map>'],
   'col': [2, '<table><tbody></tbody><colgroup>', '</colgroup></table>'],
   'legend': [1, '<fieldset>', '</fieldset>'],
   'param': [1, '<object>', '</object>'],
-  'tr': [2, '<table><tbody>', '</tbody></table>'],
-
-  'optgroup': selectWrap,
-  'option': selectWrap,
-
-  'caption': tableWrap,
+  'tr': [2, '<table><tbody>', '</tbody></table>']
+'optgroup': selectWrap,
+  'option': selectWrap
+'caption': tableWrap,
   'colgroup': tableWrap,
   'tbody': tableWrap,
   'tfoot': tableWrap,
-  'thead': tableWrap,
-
-  'td': trWrap,
+  'thead': tableWrap
+'td': trWrap,
   'th': trWrap
 };
 

@@ -1,117 +1,84 @@
-const React = require('react');
-const PropTypes = require('prop-types');
-const assign = require('domkit/appendVendorPrefix');
-const insertKeyframesRule = require('domkit/insertKeyframesRule');
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
+import assign from 'domkit/appendVendorPrefix'
+import insertKeyframesRule from 'domkit/insertKeyframesRule'
 
-/**
- * @type {Object}
- */
 const keyframes = {
-    '0%': {
-        transform: 'scale(1)',
-        opacity: 1
-    },
-    '45%': {
-        transform: 'scale(0.1)',
-        opacity: 0.7
-    },
-    '80%': {
-        transform: 'scale(1)',
-        opacity: 1
+  '0%': {
+    transform: 'scale(1)',
+    opacity: 1
+  },
+  '45%': {
+    transform: 'scale(0.1)',
+    opacity: 0.7
+  },
+  '80%': {
+    transform: 'scale(1)',
+    opacity: 1
+  }
+}
+
+const animationName = insertKeyframesRule(keyframes)
+
+class Loader extends Component {
+  static propTypes = {
+    loading: PropTypes.bool,
+    color: PropTypes.string,
+    size: PropTypes.string,
+    margin: PropTypes.string
+  }
+
+  static defaultProps = {
+    loading: true,
+    color: '#ffffff',
+    size: '15px',
+    margin: '2px'
+  }
+
+  getBallStyle = () => {
+    return {
+      backgroundColor: this.props.color,
+      width: this.props.size,
+      height: this.props.size,
+      margin: this.props.margin,
+      borderRadius: '100%',
+      verticalAlign: this.props.verticalAlign
     }
-};
+  }
 
-/**
- * @type {String}
- */
-const animationName = insertKeyframesRule(keyframes);
+  getAnimationStyle = (i) => {
+    const animation = [animationName, '0.75s', (i * 0.12) + 's', 'infinite', 'cubic-bezier(.2,.68,.18,1.08)'].join(' ')
+    const animationFillMode = 'both'
 
-const Loader = React.createClass({
-    /**
-     * @type {Object}
-     */
-    propTypes: {
-        loading: PropTypes.bool,
-        color: PropTypes.string,
-        size: PropTypes.string,
-        margin: PropTypes.string
-    },
-
-    /**
-     * @return {Object}
-     */
-    getDefaultProps: function() {
-        return {
-            loading: true,
-            color: '#ffffff',
-            size: '15px',
-            margin: '2px'
-        };
-    },
-
-    /**
-     * @return {Object}
-     */
-    getBallStyle: function() {
-        return {
-            backgroundColor: this.props.color,
-            width: this.props.size,
-            height: this.props.size,
-            margin: this.props.margin,
-            borderRadius: '100%',
-            verticalAlign: this.props.verticalAlign
-        };
-    },
-
-    /**
-     * @param  {Number} i
-     * @return {Object}
-     */
-    getAnimationStyle: function(i) {
-        const animation = [animationName, '0.75s', (i * 0.12) + 's', 'infinite', 'cubic-bezier(.2,.68,.18,1.08)'].join(' ');
-        const animationFillMode = 'both';
-
-        return {
-            animation: animation,
-            animationFillMode: animationFillMode
-        };
-    },
-
-    /**
-     * @param  {Number} i
-     * @return {Object}
-     */
-    getStyle: function(i) {
-        return assign(
-            this.getBallStyle(i),
-            this.getAnimationStyle(i),
-            {
-                display: 'inline-block'
-            }
-        );
-    },
-
-    /**
-     * @param  {Boolean} loading
-     * @return {ReactComponent || null}
-     */
-    renderLoader: function(loading) {
-        if (loading) {
-            return (
-                <div id={this.props.id} className={this.props.className}>
-                    <div style={this.getStyle(1)}></div>
-                    <div style={this.getStyle(2)}></div>
-                    <div style={this.getStyle(3)}></div>
-                </div>
-            );
-        }
-
-        return null;
-    },
-
-    render: function() {
-        return this.renderLoader(this.props.loading);
+    return {
+      animation: animation,
+      animationFillMode: animationFillMode
     }
-});
+  }
 
-module.exports = Loader;
+  getStyle = (i) => {
+    return assign(
+      this.getBallStyle(i),
+      this.getAnimationStyle(i),
+      {
+        display: 'inline-block'
+      }
+    )
+  }
+
+  render() {
+    if (this.props.loading) {
+      return (
+        <div id={this.props.id} className={this.props.className}>
+          <div style={this.getStyle(1)}/>
+          <div style={this.getStyle(2)}/>
+          <div style={this.getStyle(3)}/>
+        </div>
+      )
+    }
+
+    return null
+  }
+}
+
+export default Loader

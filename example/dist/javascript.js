@@ -47,15 +47,13 @@ CodeMirror.defineMode("javascript", function(config, parserConfig) {
         // object-like things
         "interface": kw("interface"),
         "extends": kw("extends"),
-        "constructor": kw("constructor"),
-
-        // scope modifiers
+        "constructor": kw("constructor")
+      // scope modifiers
         "public": kw("public"),
         "private": kw("private"),
         "protected": kw("protected"),
-        "static": kw("static"),
-
-        // types
+        "static": kw("static")
+      // types
         "string": type, "number": type, "bool": type, "any": type
       };
 
@@ -622,9 +620,8 @@ CodeMirror.defineMode("javascript", function(config, parserConfig) {
       if (parserConfig.globalVars && typeof parserConfig.globalVars == "object")
         state.globalVars = parserConfig.globalVars;
       return state;
-    },
-
-    token: function(stream, state) {
+    }
+  token: function(stream, state) {
       if (stream.sol()) {
         if (!state.lexical.hasOwnProperty("align"))
           state.lexical.align = false;
@@ -636,9 +633,8 @@ CodeMirror.defineMode("javascript", function(config, parserConfig) {
       if (type == "comment") return style;
       state.lastType = type == "operator" && (content == "++" || content == "--") ? "incdec" : type;
       return parseJS(state, style, type, content, stream);
-    },
-
-    indent: function(state, textAfter) {
+    }
+  indent: function(state, textAfter) {
       if (state.tokenize == tokenComment) return CodeMirror.Pass;
       if (state.tokenize != tokenBase) return 0;
       var firstChar = textAfter && textAfter.charAt(0), lexical = state.lexical;
@@ -662,15 +658,13 @@ CodeMirror.defineMode("javascript", function(config, parserConfig) {
         return lexical.indented + (/^(?:case|default)\b/.test(textAfter) ? indentUnit : 2 * indentUnit);
       else if (lexical.align) return lexical.column + (closing ? 0 : 1);
       else return lexical.indented + (closing ? 0 : indentUnit);
-    },
-
-    electricInput: /^\s*(?:case .*?:|default:|\{|\})$/,
+    }
+  electricInput: /^\s*(?:case .*?:|default:|\{|\})$/,
     blockCommentStart: jsonMode ? null : "/*",
     blockCommentEnd: jsonMode ? null : "*/",
     lineComment: jsonMode ? null : "//",
-    fold: "brace",
-
-    helperType: jsonMode ? "json" : "javascript",
+    fold: "brace"
+  helperType: jsonMode ? "json" : "javascript",
     jsonldMode: jsonldMode,
     jsonMode: jsonMode
   };

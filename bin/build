@@ -4,7 +4,7 @@ const rimraf = require('rimraf')
 const { exec } = require('child_process')
 
 const srcFolder = './src'
-const buildFolder = './build'
+const buildFolder = './lib'
 
 if (fs.existsSync(buildFolder)) {
   rimraf.sync(buildFolder)

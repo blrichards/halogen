@@ -4,9 +4,8 @@ var ReactDOM = require('react-dom');
 var selfCleaningTimeout = {
     componentDidUpdate: function() {
         clearTimeout(this.timeoutID);
-    },
-
-    setTimeout: function() {
+    }
+  setTimeout: function() {
         clearTimeout(this.timeoutID);
         this.timeoutID = setTimeout.apply(null, arguments);
     }
@@ -15,36 +14,30 @@ var selfCleaningTimeout = {
 var ComponentPreview = React.createClass({
     propTypes: {
         code: React.PropTypes.string.isRequired
-    },
-
-    mixins: [selfCleaningTimeout],
-
-    render: function() {
+    }
+  mixins: [selfCleaningTimeout]
+  render: function() {
         return <div ref="mount" />;
-    },
-
-    componentDidMount: function() {
+    }
+  componentDidMount: function() {
         this.executeCode();
-    },
-
-    componentDidUpdate: function(prevProps) {
+    }
+  componentDidUpdate: function(prevProps) {
         // execute code only when the state's not being updated by switching tab
         // this avoids re-displaying the error, which comes after a certain delay
         if (this.props.code !== prevProps.code) {
             this.executeCode();
         }
-    },
-
-    compileCode: function() {
+    }
+  compileCode: function() {
         return JSXTransformer.transform(
                 '(function() {' +
                 this.props.code +
                 '\n})();',
             { harmony: true }
         ).code;
-    },
-
-    executeCode: function() {
+    }
+  executeCode: function() {
         var mountNode = this.refs.mount;
 
         try {
@@ -90,21 +83,18 @@ var CodeMirrorEditor = React.createClass({
             readOnly: this.props.readOnly
         });
         this.editor.on('change', this.handleChange);
-    },
-
-    componentDidUpdate: function() {
+    }
+  componentDidUpdate: function() {
         if (this.props.readOnly) {
             this.editor.setValue(this.props.codeText);
         }
-    },
-
-    handleChange: function() {
+    }
+  handleChange: function() {
         if (!this.props.readOnly && this.props.onChange) {
             this.props.onChange(this.editor.getValue());
         }
-    },
-
-    render: function() {
+    }
+  render: function() {
         // wrap in a div to fully contain CodeMirror
         var editor;
 
@@ -125,21 +115,18 @@ var CodeMirrorEditor = React.createClass({
 var ReactPlayground = React.createClass({
     propTypes: {
         codeText: React.PropTypes.string.isRequired
-    },
-
-    getInitialState: function() {
+    }
+  getInitialState: function() {
         return {
             code: this.props.codeText
         };
-    },
-
-    handleCodeChange: function(code) {
+    }
+  handleCodeChange: function(code) {
         this.setState({
             code: code
         });
-    },
-
-    changeTab: function(){
+    }
+  changeTab: function(){
         if(this.state.tab == 'preview')
             this.setState({
                 tab: 'edit'
@@ -148,9 +135,8 @@ var ReactPlayground = React.createClass({
             this.setState({
                 tab: 'preview'
             })
-    },
-
-    render: function() {
+    }
+  render: function() {
 
         var tabText = this.state.tab == 'preview'? 'Live Preview': 'Live Edit';
         var code = <div className="playgroundCode">
@@ -166,7 +152,7 @@ var ReactPlayground = React.createClass({
 
         return (
          <div className="playground">
-            <div className="playgroundTab" onClick={this.changeTab}><span className="blur">{tabText}</span></div>
+            <div className="playgroundTab" onClick={this.changeTab}><span className="blur">{tabText}</span/>
             {this.state.tab == 'preview'? code: preview}
          </div>
       );

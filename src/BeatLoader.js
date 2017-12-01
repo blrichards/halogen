@@ -62,7 +62,7 @@ class BeatLoader extends Component {
     )
   }
 
-  render () {
+  render() {
     if (this.props.loading) {
       return (
         <div id={this.props.id} className={this.props.className}>

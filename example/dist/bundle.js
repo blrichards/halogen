@@ -149,9 +149,7 @@ var React = require('react');
 var assign = require('domkit/appendVendorPrefix');
 var insertKeyframesRule = require('domkit/insertKeyframesRule');
 
-/**
- * @type {Object}
- */
+
 var keyframes = {
     '50%': {
         transform: 'scale(0.75)',
@@ -166,9 +164,8 @@ var keyframes = {
 var animationName = insertKeyframesRule(keyframes);
 
 var Loader = React.createClass({
-    displayName: 'Loader',
-
-    /**
+    displayName: 'Loader'
+  /**
      * @type {Object}
      */
     propTypes: {
@@ -176,9 +173,8 @@ var Loader = React.createClass({
         color: React.PropTypes.string,
         size: React.PropTypes.string,
         margin: React.PropTypes.string
-    },
-
-    /**
+    }
+  /**
      * @return {Object}
      */
     getDefaultProps: function getDefaultProps() {
@@ -188,9 +184,8 @@ var Loader = React.createClass({
             size: '15px',
             margin: '2px'
         };
-    },
-
-    /**
+    }
+  /**
      * @return {Object}
      */
     getBallStyle: function getBallStyle() {
@@ -202,9 +197,8 @@ var Loader = React.createClass({
             borderRadius: '100%',
             verticalAlign: this.props.verticalAlign
         };
-    },
-
-    /**
+    }
+  /**
      * @param  {Number} i
      * @return {Object}
      */
@@ -216,9 +210,8 @@ var Loader = React.createClass({
             animation: animation,
             animationFillMode: animationFillMode
         };
-    },
-
-    /**
+    }
+  /**
      * @param  {Number} i
      * @return {Object}
      */
@@ -226,14 +219,13 @@ var Loader = React.createClass({
         return assign(this.getBallStyle(i), this.getAnimationStyle(i), {
             display: 'inline-block'
         });
-    },
-
-    /**
+    }
+  /**
      * @param  {Boolean} loading
      * @return {ReactComponent || null}
      */
     renderLoader: function renderLoader(loading) {
-        if (loading) {
+        if (this.props.loading) {
             return React.createElement(
                 'div',
                 { id: this.props.id, className: this.props.className },
@@ -244,14 +236,13 @@ var Loader = React.createClass({
         }
 
         return null;
-    },
-
-    render: function render() {
+    }
+  render: function render() {
         return this.renderLoader(this.props.loading);
     }
 });
 
-module.exports = Loader;
+export default Loader;
 
 },{"domkit/appendVendorPrefix":"/Users/yuanyan/React/halogen/node_modules/domkit/appendVendorPrefix.js","domkit/insertKeyframesRule":"/Users/yuanyan/React/halogen/node_modules/domkit/insertKeyframesRule.js","react":false}],"/Users/yuanyan/React/halogen/src/BounceLoader.js":[function(require,module,exports){
 'use strict';
@@ -260,9 +251,7 @@ var React = require('react');
 var assign = require('domkit/appendVendorPrefix');
 var insertKeyframesRule = require('domkit/insertKeyframesRule');
 
-/**
- * @type {Object}
- */
+
 var keyframes = {
     '0%, 100%': {
         transform: 'scale(0)'
@@ -272,24 +261,20 @@ var keyframes = {
     }
 };
 
-/**
- * @type {String}
- */
+
 var animationName = insertKeyframesRule(keyframes);
 
 var Loader = React.createClass({
-    displayName: 'Loader',
-
-    /**
+    displayName: 'Loader'
+  /**
      * @type {Object}
      */
     propTypes: {
         loading: React.PropTypes.bool,
         color: React.PropTypes.string,
         size: React.PropTypes.string
-    },
-
-    /**
+    }
+  /**
      * @return {Object}
      */
     getDefaultProps: function getDefaultProps() {
@@ -298,9 +283,8 @@ var Loader = React.createClass({
             color: '#ffffff',
             size: '60px'
         };
-    },
-
-    /**
+    }
+  /**
      * @return {Object}
      */
     getBallStyle: function getBallStyle() {
@@ -315,9 +299,8 @@ var Loader = React.createClass({
             left: 0,
             verticalAlign: this.props.verticalAlign
         };
-    },
-
-    /**
+    }
+  /**
      * @param  {Number} i
      * @return {Object}
      */
@@ -329,9 +312,8 @@ var Loader = React.createClass({
             animation: animation,
             animationFillMode: animationFillMode
         };
-    },
-
-    /**
+    }
+  /**
      * @param  {Number} i
      * @return {Object}
      */
@@ -345,14 +327,13 @@ var Loader = React.createClass({
             height: this.props.size,
             position: 'relative'
         });
-    },
-
-    /**
+    }
+  /**
      * @param  {Boolean} loading
      * @return {ReactComponent || null}
      */
     renderLoader: function renderLoader(loading) {
-        if (loading) {
+        if (this.props.loading) {
             return React.createElement(
                 'div',
                 { id: this.props.id, className: this.props.className },
@@ -366,14 +347,13 @@ var Loader = React.createClass({
         }
 
         return null;
-    },
-
-    render: function render() {
+    }
+  render: function render() {
         return this.renderLoader(this.props.loading);
     }
 });
 
-module.exports = Loader;
+export default Loader;
 
 },{"domkit/appendVendorPrefix":"/Users/yuanyan/React/halogen/node_modules/domkit/appendVendorPrefix.js","domkit/insertKeyframesRule":"/Users/yuanyan/React/halogen/node_modules/domkit/insertKeyframesRule.js","react":false}],"/Users/yuanyan/React/halogen/src/ClipLoader.js":[function(require,module,exports){
 'use strict';
@@ -382,9 +362,7 @@ var React = require('react');
 var assign = require('domkit/appendVendorPrefix');
 var insertKeyframesRule = require('domkit/insertKeyframesRule');
 
-/**
- * @type {Object}
- */
+
 var keyframes = {
     '0%': {
         transform: 'rotate(0deg) scale(1)'
@@ -397,24 +375,20 @@ var keyframes = {
     }
 };
 
-/**
- * @type {String}
- */
+
 var animationName = insertKeyframesRule(keyframes);
 
 var Loader = React.createClass({
-    displayName: 'Loader',
-
-    /**
+    displayName: 'Loader'
+  /**
      * @type {Object}
      */
     propTypes: {
         loading: React.PropTypes.bool,
         color: React.PropTypes.string,
         size: React.PropTypes.string
-    },
-
-    /**
+    }
+  /**
      * @return {Object}
      */
     getDefaultProps: function getDefaultProps() {
@@ -423,9 +397,8 @@ var Loader = React.createClass({
             color: '#ffffff',
             size: '35px'
         };
-    },
-
-    /**
+    }
+  /**
      * @return {Object}
      */
     getBallStyle: function getBallStyle() {
@@ -439,9 +412,8 @@ var Loader = React.createClass({
             background: 'transparent !important',
             verticalAlign: this.props.verticalAlign
         };
-    },
-
-    /**
+    }
+  /**
      * @param  {Number} i
      * @return {Object}
      */
@@ -453,9 +425,8 @@ var Loader = React.createClass({
             animation: animation,
             animationFillMode: animationFillMode
         };
-    },
-
-    /**
+    }
+  /**
      * @param  {Number} i
      * @return {Object}
      */
@@ -463,14 +434,13 @@ var Loader = React.createClass({
         return assign(this.getBallStyle(i), this.getAnimationStyle(i), {
             display: 'inline-block'
         });
-    },
-
-    /**
+    }
+  /**
      * @param  {Boolean} loading
      * @return {ReactComponent || null}
      */
     renderLoader: function renderLoader(loading) {
-        if (loading) {
+        if (this.props.loading) {
             return React.createElement(
                 'div',
                 { id: this.props.id, className: this.props.className },
@@ -479,14 +449,13 @@ var Loader = React.createClass({
         }
 
         return null;
-    },
-
-    render: function render() {
+    }
+  render: function render() {
         return this.renderLoader(this.props.loading);
     }
 });
 
-module.exports = Loader;
+export default Loader;
 
 },{"domkit/appendVendorPrefix":"/Users/yuanyan/React/halogen/node_modules/domkit/appendVendorPrefix.js","domkit/insertKeyframesRule":"/Users/yuanyan/React/halogen/node_modules/domkit/insertKeyframesRule.js","react":false}],"/Users/yuanyan/React/halogen/src/DotLoader.js":[function(require,module,exports){
 'use strict';
@@ -495,18 +464,14 @@ var React = require('react');
 var assign = require('domkit/appendVendorPrefix');
 var insertKeyframesRule = require('domkit/insertKeyframesRule');
 
-/**
- * @type {Object}
- */
+
 var rotateKeyframes = {
     '100%': {
         transform: 'rotate(360deg)'
     }
 };
 
-/**
- * @type {Object}
- */
+
 var bounceKeyframes = {
     '0%, 100%': {
         transform: 'scale(0)'
@@ -516,20 +481,15 @@ var bounceKeyframes = {
     }
 };
 
-/**
- * @type {String}
- */
+
 var rotateAnimationName = insertKeyframesRule(rotateKeyframes);
 
-/**
- * @type {String}
- */
+
 var bounceAnimationName = insertKeyframesRule(bounceKeyframes);
 
 var Loader = React.createClass({
-    displayName: 'Loader',
-
-    /**
+    displayName: 'Loader'
+  /**
      * @type {Object}
      */
     propTypes: {
@@ -537,9 +497,8 @@ var Loader = React.createClass({
         color: React.PropTypes.string,
         size: React.PropTypes.string,
         margin: React.PropTypes.string
-    },
-
-    /**
+    }
+  /**
      * @return {Object}
      */
     getDefaultProps: function getDefaultProps() {
@@ -548,9 +507,8 @@ var Loader = React.createClass({
             color: '#ffffff',
             size: '60px'
         };
-    },
-
-    /**
+    }
+  /**
      * @param  {String} size
      * @return {Object}
      */
@@ -562,9 +520,8 @@ var Loader = React.createClass({
             borderRadius: '100%',
             verticalAlign: this.props.verticalAlign
         };
-    },
-
-    /**
+    }
+  /**
      * @param  {Number} i
      * @return {Object}
      */
@@ -576,9 +533,8 @@ var Loader = React.createClass({
             animation: animation,
             animationFillMode: animationFillMode
         };
-    },
-
-    /**
+    }
+  /**
      * @param  {Number} i
      * @return {Object}
      */
@@ -599,14 +555,13 @@ var Loader = React.createClass({
             height: size,
             position: 'relative'
         });
-    },
-
-    /**
+    }
+  /**
      * @param  {Boolean} loading
      * @return {ReactComponent || null}
      */
     renderLoader: function renderLoader(loading) {
-        if (loading) {
+        if (this.props.loading) {
             return React.createElement(
                 'div',
                 { id: this.props.id, className: this.props.className },
@@ -620,14 +575,13 @@ var Loader = React.createClass({
         }
 
         return null;
-    },
-
-    render: function render() {
+    }
+  render: function render() {
         return this.renderLoader(this.props.loading);
     }
 });
 
-module.exports = Loader;
+export default Loader;
 
 },{"domkit/appendVendorPrefix":"/Users/yuanyan/React/halogen/node_modules/domkit/appendVendorPrefix.js","domkit/insertKeyframesRule":"/Users/yuanyan/React/halogen/node_modules/domkit/insertKeyframesRule.js","react":false}],"/Users/yuanyan/React/halogen/src/FadeLoader.js":[function(require,module,exports){
 'use strict';
@@ -636,9 +590,7 @@ var React = require('react');
 var assign = require('domkit/appendVendorPrefix');
 var insertKeyframesRule = require('domkit/insertKeyframesRule');
 
-/**
- * @type {Object}
- */
+
 var keyframes = {
     '50%': {
         opacity: 0.3
@@ -648,15 +600,12 @@ var keyframes = {
     }
 };
 
-/**
- * @type {String}
- */
+
 var animationName = insertKeyframesRule(keyframes);
 
 var Loader = React.createClass({
-    displayName: 'Loader',
-
-    /**
+    displayName: 'Loader'
+  /**
      * @type {Object}
      */
     propTypes: {
@@ -666,9 +615,8 @@ var Loader = React.createClass({
         width: React.PropTypes.string,
         margin: React.PropTypes.string,
         radius: React.PropTypes.string
-    },
-
-    /**
+    }
+  /**
      * @return {Object}
      */
     getDefaultProps: function getDefaultProps() {
@@ -680,9 +628,8 @@ var Loader = React.createClass({
             margin: '2px',
             radius: '2px'
         };
-    },
-
-    /**
+    }
+  /**
      * @param  {Number} i
      * @return {Object}
      */
@@ -695,9 +642,8 @@ var Loader = React.createClass({
             borderRadius: this.props.radius,
             verticalAlign: this.props.verticalAlign
         };
-    },
-
-    /**
+    }
+  /**
      * @param  {Number} i
      * @return {Object}
      */
@@ -709,9 +655,8 @@ var Loader = React.createClass({
             animation: animation,
             animationFillMode: animationFillMode
         };
-    },
-
-    /**
+    }
+  /**
      * @param  {Number} i
      * @return {Object}
      */
@@ -761,9 +706,8 @@ var Loader = React.createClass({
         };
 
         return lines['l' + i];
-    },
-
-    /**
+    }
+  /**
      * @param  {Number} i
      * @return {Object}
      */
@@ -771,14 +715,13 @@ var Loader = React.createClass({
         return assign(this.getLineStyle(i), this.getPosStyle(i), this.getAnimationStyle(i), {
             position: 'absolute'
         });
-    },
-
-    /**
+    }
+  /**
      * @param  {Boolean} loading
      * @return {ReactComponent || null}
      */
     renderLoader: function renderLoader(loading) {
-        if (loading) {
+        if (this.props.loading) {
             var style = {
                 position: 'relative',
                 fontSize: 0
@@ -803,14 +746,13 @@ var Loader = React.createClass({
         }
 
         return null;
-    },
-
-    render: function render() {
+    }
+  render: function render() {
         return this.renderLoader(this.props.loading);
     }
 });
 
-module.exports = Loader;
+export default Loader;
 
 },{"domkit/appendVendorPrefix":"/Users/yuanyan/React/halogen/node_modules/domkit/appendVendorPrefix.js","domkit/insertKeyframesRule":"/Users/yuanyan/React/halogen/node_modules/domkit/insertKeyframesRule.js","react":false}],"/Users/yuanyan/React/halogen/src/GridLoader.js":[function(require,module,exports){
 'use strict';
@@ -819,9 +761,7 @@ var React = require('react');
 var assign = require('domkit/appendVendorPrefix');
 var insertKeyframesRule = require('domkit/insertKeyframesRule');
 
-/**
- * @type {Object}
- */
+
 var keyframes = {
     '0%': {
         transform: 'scale(1)'
@@ -836,9 +776,7 @@ var keyframes = {
     }
 };
 
-/**
- * @type {String}
- */
+
 var animationName = insertKeyframesRule(keyframes);
 
 /**
@@ -850,9 +788,8 @@ function random(top) {
 }
 
 var Loader = React.createClass({
-    displayName: 'Loader',
-
-    /**
+    displayName: 'Loader'
+  /**
      * @type {Object}
      */
     propTypes: {
@@ -860,9 +797,8 @@ var Loader = React.createClass({
         color: React.PropTypes.string,
         size: React.PropTypes.string,
         margin: React.PropTypes.string
-    },
-
-    /**
+    }
+  /**
      * @return {Object}
      */
     getDefaultProps: function getDefaultProps() {
@@ -872,9 +808,8 @@ var Loader = React.createClass({
             size: '15px',
             margin: '2px'
         };
-    },
-
-    /**
+    }
+  /**
      * @return {Object}
      */
     getBallStyle: function getBallStyle() {
@@ -886,9 +821,8 @@ var Loader = React.createClass({
             borderRadius: '100%',
             verticalAlign: this.props.verticalAlign
         };
-    },
-
-    /**
+    }
+  /**
      * @param  {Number} i
      * @return {Object}
      */
@@ -903,9 +837,8 @@ var Loader = React.createClass({
             animation: animation,
             animationFillMode: animationFillMode
         };
-    },
-
-    /**
+    }
+  /**
      * @param  {Number} i
      * @return {Object}
      */
@@ -913,14 +846,13 @@ var Loader = React.createClass({
         return assign(this.getBallStyle(i), this.getAnimationStyle(i), {
             display: 'inline-block'
         });
-    },
-
-    /**
+    }
+  /**
      * @param  {Boolean} loading
      * @return {ReactComponent || null}
      */
     renderLoader: function renderLoader(loading) {
-        if (loading) {
+        if (this.props.loading) {
             var style = {
                 width: parseFloat(this.props.size) * 3 + parseFloat(this.props.margin) * 6,
                 fontSize: 0
@@ -946,14 +878,13 @@ var Loader = React.createClass({
         }
 
         return null;
-    },
-
-    render: function render() {
+    }
+  render: function render() {
         return this.renderLoader(this.props.loading);
     }
 });
 
-module.exports = Loader;
+export default Loader;
 
 },{"domkit/appendVendorPrefix":"/Users/yuanyan/React/halogen/node_modules/domkit/appendVendorPrefix.js","domkit/insertKeyframesRule":"/Users/yuanyan/React/halogen/node_modules/domkit/insertKeyframesRule.js","react":false}],"/Users/yuanyan/React/halogen/src/MoonLoader.js":[function(require,module,exports){
 'use strict';
@@ -962,24 +893,19 @@ var React = require('react');
 var assign = require('domkit/appendVendorPrefix');
 var insertKeyframesRule = require('domkit/insertKeyframesRule');
 
-/**
- * @type {Object}
- */
+
 var keyframes = {
     '100%': {
         transform: 'rotate(360deg)'
     }
 };
 
-/**
- * @type {String}
- */
+
 var animationName = insertKeyframesRule(keyframes);
 
 var Loader = React.createClass({
-    displayName: 'Loader',
-
-    /**
+    displayName: 'Loader'
+  /**
      * @type {Object}
      */
     propTypes: {
@@ -987,9 +913,8 @@ var Loader = React.createClass({
         color: React.PropTypes.string,
         size: React.PropTypes.string,
         margin: React.PropTypes.string
-    },
-
-    /**
+    }
+  /**
      * @return {Object}
      */
     getDefaultProps: function getDefaultProps() {
@@ -998,9 +923,8 @@ var Loader = React.createClass({
             color: '#ffffff',
             size: '60px'
         };
-    },
-
-    /**
+    }
+  /**
      * @param  {String} size
      * @return {Object}
      */
@@ -1011,9 +935,8 @@ var Loader = React.createClass({
             borderRadius: '100%',
             verticalAlign: this.props.verticalAlign
         };
-    },
-
-    /**
+    }
+  /**
      * @param  {Number} i
      * @return {Object}
      */
@@ -1025,9 +948,8 @@ var Loader = React.createClass({
             animation: animation,
             animationFillMode: animationFillMode
         };
-    },
-
-    /**
+    }
+  /**
      * @param  {Number} i
      * @return {Object}
      */
@@ -1052,14 +974,13 @@ var Loader = React.createClass({
                 position: 'relative'
             });
         }
-    },
-
-    /**
+    }
+  /**
      * @param  {Boolean} loading
      * @return {ReactComponent || null}
      */
     renderLoader: function renderLoader(loading) {
-        if (loading) {
+        if (this.props.loading) {
             return React.createElement(
                 'div',
                 { id: this.props.id, className: this.props.className },
@@ -1073,14 +994,13 @@ var Loader = React.createClass({
         }
 
         return null;
-    },
-
-    render: function render() {
+    }
+  render: function render() {
         return this.renderLoader(this.props.loading);
     }
 });
 
-module.exports = Loader;
+export default Loader;
 
 },{"domkit/appendVendorPrefix":"/Users/yuanyan/React/halogen/node_modules/domkit/appendVendorPrefix.js","domkit/insertKeyframesRule":"/Users/yuanyan/React/halogen/node_modules/domkit/insertKeyframesRule.js","react":false}],"/Users/yuanyan/React/halogen/src/PacmanLoader.js":[function(require,module,exports){
 'use strict';
@@ -1089,15 +1009,12 @@ var React = require('react');
 var assign = require('domkit/appendVendorPrefix');
 var insertKeyframesRule = require('domkit/insertKeyframesRule');
 
-/**
- * @type {Object}
- */
+
 var animations = {};
 
 var Loader = React.createClass({
-    displayName: 'Loader',
-
-    /**
+    displayName: 'Loader'
+  /**
      * @type {Object}
      */
     propTypes: {
@@ -1105,9 +1022,8 @@ var Loader = React.createClass({
         color: React.PropTypes.string,
         size: React.PropTypes.number,
         margin: React.PropTypes.number
-    },
-
-    /**
+    }
+  /**
      * @return {Object}
      */
     getDefaultProps: function getDefaultProps() {
@@ -1117,9 +1033,8 @@ var Loader = React.createClass({
             size: 25,
             margin: 2
         };
-    },
-
-    /**
+    }
+  /**
      * @return {Object}
      */
     getBallStyle: function getBallStyle() {
@@ -1131,9 +1046,8 @@ var Loader = React.createClass({
             borderRadius: '100%',
             verticalAlign: this.props.verticalAlign
         };
-    },
-
-    /**
+    }
+  /**
      * @param  {Number} i
      * @return {Object}
      */
@@ -1160,9 +1074,8 @@ var Loader = React.createClass({
             animation: animation,
             animationFillMode: animationFillMode
         };
-    },
-
-    /**
+    }
+  /**
      * @param  {Number} i
      * @return {Object}
      */
@@ -1190,14 +1103,13 @@ var Loader = React.createClass({
             top: 25,
             left: 100
         });
-    },
-
-    /**
+    }
+  /**
      * @param  {Boolean} loading
      * @return {ReactComponent || null}
      */
     renderLoader: function renderLoader(loading) {
-        if (loading) {
+        if (this.props.loading) {
             var style = {
                 position: 'relative',
                 fontSize: 0
@@ -1219,14 +1131,13 @@ var Loader = React.createClass({
         }
 
         return null;
-    },
-
-    render: function render() {
+    }
+  render: function render() {
         return this.renderLoader(this.props.loading);
     }
 });
 
-module.exports = Loader;
+export default Loader;
 
 },{"domkit/appendVendorPrefix":"/Users/yuanyan/React/halogen/node_modules/domkit/appendVendorPrefix.js","domkit/insertKeyframesRule":"/Users/yuanyan/React/halogen/node_modules/domkit/insertKeyframesRule.js","react":false}],"/Users/yuanyan/React/halogen/src/PulseLoader.js":[function(require,module,exports){
 'use strict';
@@ -1235,9 +1146,7 @@ var React = require('react');
 var assign = require('domkit/appendVendorPrefix');
 var insertKeyframesRule = require('domkit/insertKeyframesRule');
 
-/**
- * @type {Object}
- */
+
 var keyframes = {
     '0%': {
         transform: 'scale(1)',
@@ -1253,15 +1162,12 @@ var keyframes = {
     }
 };
 
-/**
- * @type {String}
- */
+
 var animationName = insertKeyframesRule(keyframes);
 
 var Loader = React.createClass({
-    displayName: 'Loader',
-
-    /**
+    displayName: 'Loader'
+  /**
      * @type {Object}
      */
     propTypes: {
@@ -1269,9 +1175,8 @@ var Loader = React.createClass({
         color: React.PropTypes.string,
         size: React.PropTypes.string,
         margin: React.PropTypes.string
-    },
-
-    /**
+    }
+  /**
      * @return {Object}
      */
     getDefaultProps: function getDefaultProps() {
@@ -1281,9 +1186,8 @@ var Loader = React.createClass({
             size: '15px',
             margin: '2px'
         };
-    },
-
-    /**
+    }
+  /**
      * @return {Object}
      */
     getBallStyle: function getBallStyle() {
@@ -1295,9 +1199,8 @@ var Loader = React.createClass({
             borderRadius: '100%',
             verticalAlign: this.props.verticalAlign
         };
-    },
-
-    /**
+    }
+  /**
      * @param  {Number} i
      * @return {Object}
      */
@@ -1309,9 +1212,8 @@ var Loader = React.createClass({
             animation: animation,
             animationFillMode: animationFillMode
         };
-    },
-
-    /**
+    }
+  /**
      * @param  {Number} i
      * @return {Object}
      */
@@ -1319,14 +1221,13 @@ var Loader = React.createClass({
         return assign(this.getBallStyle(i), this.getAnimationStyle(i), {
             display: 'inline-block'
         });
-    },
-
-    /**
+    }
+  /**
      * @param  {Boolean} loading
      * @return {ReactComponent || null}
      */
     renderLoader: function renderLoader(loading) {
-        if (loading) {
+        if (this.props.loading) {
             return React.createElement(
                 'div',
                 { id: this.props.id, className: this.props.className },
@@ -1337,14 +1238,13 @@ var Loader = React.createClass({
         }
 
         return null;
-    },
-
-    render: function render() {
+    }
+  render: function render() {
         return this.renderLoader(this.props.loading);
     }
 });
 
-module.exports = Loader;
+export default Loader;
 
 },{"domkit/appendVendorPrefix":"/Users/yuanyan/React/halogen/node_modules/domkit/appendVendorPrefix.js","domkit/insertKeyframesRule":"/Users/yuanyan/React/halogen/node_modules/domkit/insertKeyframesRule.js","react":false}],"/Users/yuanyan/React/halogen/src/RingLoader.js":[function(require,module,exports){
 'use strict';
@@ -1353,9 +1253,7 @@ var React = require('react');
 var assign = require('domkit/appendVendorPrefix');
 var insertKeyframesRule = require('domkit/insertKeyframesRule');
 
-/**
- * @type {Object}
- */
+
 var rightRotateKeyframes = {
     '0%': {
         transform: 'rotateX(0deg) rotateY(0deg) rotateZ(0deg)'
@@ -1366,9 +1264,7 @@ var rightRotateKeyframes = {
     }
 };
 
-/**
- * @type {Object}
- */
+
 var leftRotateKeyframes = {
     '0%': {
         transform: 'rotateX(0deg) rotateY(0deg) rotateZ(0deg)'
@@ -1378,20 +1274,15 @@ var leftRotateKeyframes = {
     }
 };
 
-/**
- * @type {String}
- */
+
 var rightRotateAnimationName = insertKeyframesRule(rightRotateKeyframes);
 
-/**
- * @type {String}
- */
+
 var leftRotateAnimationName = insertKeyframesRule(leftRotateKeyframes);
 
 var Loader = React.createClass({
-    displayName: 'Loader',
-
-    /**
+    displayName: 'Loader'
+  /**
      * @type {Object}
      */
     propTypes: {
@@ -1399,9 +1290,8 @@ var Loader = React.createClass({
         color: React.PropTypes.string,
         size: React.PropTypes.string,
         margin: React.PropTypes.string
-    },
-
-    /**
+    }
+  /**
      * @return {Object}
      */
     getDefaultProps: function getDefaultProps() {
@@ -1410,9 +1300,8 @@ var Loader = React.createClass({
             color: '#ffffff',
             size: '60px'
         };
-    },
-
-    /**
+    }
+  /**
      * @param {String} size
      * @return {Object}
      */
@@ -1425,9 +1314,8 @@ var Loader = React.createClass({
             borderRadius: '100%',
             verticalAlign: this.props.verticalAlign
         };
-    },
-
-    /**
+    }
+  /**
      * @param  {Number} i
      * @return {Object}
      */
@@ -1441,9 +1329,8 @@ var Loader = React.createClass({
             animation: animation,
             animationFillMode: animationFillMode
         };
-    },
-
-    /**
+    }
+  /**
      * @param  {Number} i
      * @return {Object}
      */
@@ -1463,14 +1350,13 @@ var Loader = React.createClass({
             height: size,
             position: 'relative'
         };
-    },
-
-    /**
+    }
+  /**
      * @param  {Boolean} loading
      * @return {ReactComponent || null}
      */
     renderLoader: function renderLoader(loading) {
-        if (loading) {
+        if (this.props.loading) {
             return React.createElement(
                 'div',
                 { id: this.props.id, className: this.props.className },
@@ -1484,14 +1370,13 @@ var Loader = React.createClass({
         }
 
         return null;
-    },
-
-    render: function render() {
+    }
+  render: function render() {
         return this.renderLoader(this.props.loading);
     }
 });
 
-module.exports = Loader;
+export default Loader;
 
 },{"domkit/appendVendorPrefix":"/Users/yuanyan/React/halogen/node_modules/domkit/appendVendorPrefix.js","domkit/insertKeyframesRule":"/Users/yuanyan/React/halogen/node_modules/domkit/insertKeyframesRule.js","react":false}],"/Users/yuanyan/React/halogen/src/RiseLoader.js":[function(require,module,exports){
 'use strict';
@@ -1505,9 +1390,7 @@ var insertKeyframesRule = require('domkit/insertKeyframesRule');
  */
 var riseAmount = 30;
 
-/**
- * @type {Object}
- */
+
 var keyframesEven = {
     '0%': {
         transform: 'scale(1.1)'
@@ -1526,9 +1409,7 @@ var keyframesEven = {
     }
 };
 
-/**
- * @type {Object}
- */
+
 var keyframesOdd = {
     '0%': {
         transform: 'scale(0.4)'
@@ -1547,20 +1428,15 @@ var keyframesOdd = {
     }
 };
 
-/**
- * @type {String}
- */
+
 var animationNameEven = insertKeyframesRule(keyframesEven);
 
-/**
- * @type {String}
- */
+
 var animationNameOdd = insertKeyframesRule(keyframesOdd);
 
 var Loader = React.createClass({
-    displayName: 'Loader',
-
-    /**
+    displayName: 'Loader'
+  /**
      * @type {Object}
      */
     propTypes: {
@@ -1568,9 +1444,8 @@ var Loader = React.createClass({
         color: React.PropTypes.string,
         size: React.PropTypes.string,
         margin: React.PropTypes.string
-    },
-
-    /**
+    }
+  /**
      * @return {Object}
      */
     getDefaultProps: function getDefaultProps() {
@@ -1580,9 +1455,8 @@ var Loader = React.createClass({
             size: '15px',
             margin: '2px'
         };
-    },
-
-    /**
+    }
+  /**
      * @return {Object}
      */
     getBallStyle: function getBallStyle() {
@@ -1594,9 +1468,8 @@ var Loader = React.createClass({
             borderRadius: '100%',
             verticalAlign: this.props.verticalAlign
         };
-    },
-
-    /**
+    }
+  /**
      * @param  {Number} i
      * @return {Object}
      */
@@ -1608,9 +1481,8 @@ var Loader = React.createClass({
             animation: animation,
             animationFillMode: animationFillMode
         };
-    },
-
-    /**
+    }
+  /**
      * @param  {Number} i
      * @return {Object}
      */
@@ -1618,14 +1490,13 @@ var Loader = React.createClass({
         return assign(this.getBallStyle(i), this.getAnimationStyle(i), {
             display: 'inline-block'
         });
-    },
-
-    /**
+    }
+  /**
      * @param  {Boolean} loading
      * @return {ReactComponent || null}
      */
     renderLoader: function renderLoader(loading) {
-        if (loading) {
+        if (this.props.loading) {
             return React.createElement(
                 'div',
                 { id: this.props.id, className: this.props.className },
@@ -1638,14 +1509,13 @@ var Loader = React.createClass({
         }
 
         return null;
-    },
-
-    render: function render() {
+    }
+  render: function render() {
         return this.renderLoader(this.props.loading);
     }
 });
 
-module.exports = Loader;
+export default Loader;
 
 },{"domkit/appendVendorPrefix":"/Users/yuanyan/React/halogen/node_modules/domkit/appendVendorPrefix.js","domkit/insertKeyframesRule":"/Users/yuanyan/React/halogen/node_modules/domkit/insertKeyframesRule.js","react":false}],"/Users/yuanyan/React/halogen/src/RotateLoader.js":[function(require,module,exports){
 'use strict';
@@ -1654,9 +1524,7 @@ var React = require('react');
 var assign = require('domkit/appendVendorPrefix');
 var insertKeyframesRule = require('domkit/insertKeyframesRule');
 
-/**
- * @type {Object}
- */
+
 var keyframes = {
     '0%': {
         transform: 'rotate(0deg)'
@@ -1669,15 +1537,12 @@ var keyframes = {
     }
 };
 
-/**
- * @type {String}
- */
+
 var animationName = insertKeyframesRule(keyframes);
 
 var Loader = React.createClass({
-    displayName: 'Loader',
-
-    /**
+    displayName: 'Loader'
+  /**
      * @type {Object}
      */
     propTypes: {
@@ -1685,9 +1550,8 @@ var Loader = React.createClass({
         color: React.PropTypes.string,
         size: React.PropTypes.string,
         margin: React.PropTypes.string
-    },
-
-    /**
+    }
+  /**
      * @return {Object}
      */
     getDefaultProps: function getDefaultProps() {
@@ -1697,9 +1561,8 @@ var Loader = React.createClass({
             size: '15px',
             margin: '2px'
         };
-    },
-
-    /**
+    }
+  /**
      * @return {Object}
      */
     getBallStyle: function getBallStyle() {
@@ -1711,9 +1574,8 @@ var Loader = React.createClass({
             borderRadius: '100%',
             verticalAlign: this.props.verticalAlign
         };
-    },
-
-    /**
+    }
+  /**
      * @param  {Number} i
      * @return {Object}
      */
@@ -1725,9 +1587,8 @@ var Loader = React.createClass({
             animation: animation,
             animationFillMode: animationFillMode
         };
-    },
-
-    /**
+    }
+  /**
      * @param  {Number} i
      * @return {Object}
      */
@@ -1745,14 +1606,13 @@ var Loader = React.createClass({
             display: 'inline-block',
             position: 'relative'
         });
-    },
-
-    /**
+    }
+  /**
      * @param  {Boolean} loading
      * @return {ReactComponent || null}
      */
     renderLoader: function renderLoader(loading) {
-        if (loading) {
+        if (this.props.loading) {
             return React.createElement(
                 'div',
                 { id: this.props.id, className: this.props.className },
@@ -1766,14 +1626,13 @@ var Loader = React.createClass({
         }
 
         return null;
-    },
-
-    render: function render() {
+    }
+  render: function render() {
         return this.renderLoader(this.props.loading);
     }
 });
 
-module.exports = Loader;
+export default Loader;
 
 },{"domkit/appendVendorPrefix":"/Users/yuanyan/React/halogen/node_modules/domkit/appendVendorPrefix.js","domkit/insertKeyframesRule":"/Users/yuanyan/React/halogen/node_modules/domkit/insertKeyframesRule.js","react":false}],"/Users/yuanyan/React/halogen/src/ScaleLoader.js":[function(require,module,exports){
 'use strict';
@@ -1782,9 +1641,7 @@ var React = require('react');
 var assign = require('domkit/appendVendorPrefix');
 var insertKeyframesRule = require('domkit/insertKeyframesRule');
 
-/**
- * @type {Object}
- */
+
 var keyframes = {
     '0%': {
         transform: 'scaley(1.0)'
@@ -1797,15 +1654,12 @@ var keyframes = {
     }
 };
 
-/**
- * @type {String}
- */
+
 var animationName = insertKeyframesRule(keyframes);
 
 var Loader = React.createClass({
-    displayName: 'Loader',
-
-    /**
+    displayName: 'Loader'
+  /**
      * @type {Object}
      */
     propTypes: {
@@ -1815,9 +1669,8 @@ var Loader = React.createClass({
         width: React.PropTypes.string,
         margin: React.PropTypes.string,
         radius: React.PropTypes.string
-    },
-
-    /**
+    }
+  /**
      * @return {Object}
      */
     getDefaultProps: function getDefaultProps() {
@@ -1829,9 +1682,8 @@ var Loader = React.createClass({
             margin: '2px',
             radius: '2px'
         };
-    },
-
-    /**
+    }
+  /**
      * @return {Object}
      */
     getLineStyle: function getLineStyle() {
@@ -1843,9 +1695,8 @@ var Loader = React.createClass({
             borderRadius: this.props.radius,
             verticalAlign: this.props.verticalAlign
         };
-    },
-
-    /**
+    }
+  /**
      * @param  {Number} i
      * @return {Object}
      */
@@ -1857,9 +1708,8 @@ var Loader = React.createClass({
             animation: animation,
             animationFillMode: animationFillMode
         };
-    },
-
-    /**
+    }
+  /**
      * @param  {Number} i
      * @return {Object}
      */
@@ -1867,14 +1717,13 @@ var Loader = React.createClass({
         return assign(this.getLineStyle(i), this.getAnimationStyle(i), {
             display: 'inline-block'
         });
-    },
-
-    /**
+    }
+  /**
      * @param  {Boolean} loading
      * @return {ReactComponent || null}
      */
     renderLoader: function renderLoader(loading) {
-        if (loading) {
+        if (this.props.loading) {
             return React.createElement(
                 'div',
                 { id: this.props.id, className: this.props.className },
@@ -1887,14 +1736,13 @@ var Loader = React.createClass({
         }
 
         return null;
-    },
-
-    render: function render() {
+    }
+  render: function render() {
         return this.renderLoader(this.props.loading);
     }
 });
 
-module.exports = Loader;
+export default Loader;
 
 },{"domkit/appendVendorPrefix":"/Users/yuanyan/React/halogen/node_modules/domkit/appendVendorPrefix.js","domkit/insertKeyframesRule":"/Users/yuanyan/React/halogen/node_modules/domkit/insertKeyframesRule.js","react":false}],"/Users/yuanyan/React/halogen/src/SkewLoader.js":[function(require,module,exports){
 'use strict';
@@ -1903,9 +1751,7 @@ var React = require('react');
 var assign = require('domkit/appendVendorPrefix');
 var insertKeyframesRule = require('domkit/insertKeyframesRule');
 
-/**
- * @type {Object}
- */
+
 var keyframes = {
     '25%': {
         transform: 'perspective(100px) rotateX(180deg) rotateY(0)'
@@ -1921,24 +1767,20 @@ var keyframes = {
     }
 };
 
-/**
- * @type {String}
- */
+
 var animationName = insertKeyframesRule(keyframes);
 
 var Loader = React.createClass({
-    displayName: 'Loader',
-
-    /**
+    displayName: 'Loader'
+  /**
      * @type {Object}
      */
     propTypes: {
         loading: React.PropTypes.bool,
         color: React.PropTypes.string,
         size: React.PropTypes.string
-    },
-
-    /**
+    }
+  /**
      * @return {Object}
      */
     getDefaultProps: function getDefaultProps() {
@@ -1947,9 +1789,8 @@ var Loader = React.createClass({
             color: '#ffffff',
             size: '20px'
         };
-    },
-
-    /**
+    }
+  /**
      * @return {Object}
      */
     getSharpStyle: function getSharpStyle() {
@@ -1961,9 +1802,8 @@ var Loader = React.createClass({
             borderBottom: this.props.size + ' solid ' + this.props.color,
             verticalAlign: this.props.verticalAlign
         };
-    },
-
-    /**
+    }
+  /**
      * @param  {Number} i
      * @return {Object}
      */
@@ -1975,9 +1815,8 @@ var Loader = React.createClass({
             animation: animation,
             animationFillMode: animationFillMode
         };
-    },
-
-    /**
+    }
+  /**
      * @param  {Number} i
      * @return {Object}
      */
@@ -1985,14 +1824,13 @@ var Loader = React.createClass({
         return assign(this.getSharpStyle(i), this.getAnimationStyle(i), {
             display: 'inline-block'
         });
-    },
-
-    /**
+    }
+  /**
      * @param  {Boolean} loading
      * @return {ReactComponent || null}
      */
     renderLoader: function renderLoader(loading) {
-        if (loading) {
+        if (this.props.loading) {
             return React.createElement(
                 'div',
                 { id: this.props.id, className: this.props.className },
@@ -2001,14 +1839,13 @@ var Loader = React.createClass({
         };
 
         return null;
-    },
-
-    render: function render() {
+    }
+  render: function render() {
         return this.renderLoader(this.props.loading);
     }
 });
 
-module.exports = Loader;
+export default Loader;
 
 },{"domkit/appendVendorPrefix":"/Users/yuanyan/React/halogen/node_modules/domkit/appendVendorPrefix.js","domkit/insertKeyframesRule":"/Users/yuanyan/React/halogen/node_modules/domkit/insertKeyframesRule.js","react":false}],"/Users/yuanyan/React/halogen/src/SquareLoader.js":[function(require,module,exports){
 'use strict';
@@ -2017,9 +1854,7 @@ var React = require('react');
 var assign = require('domkit/appendVendorPrefix');
 var insertKeyframesRule = require('domkit/insertKeyframesRule');
 
-/**
- * @type {Object}
- */
+
 var keyframes = {
     '25%': {
         transform: 'rotateX(180deg) rotateY(0)'
@@ -2035,15 +1870,12 @@ var keyframes = {
     }
 };
 
-/**
- * @type {String}
- */
+
 var animationName = insertKeyframesRule(keyframes);
 
 var Loader = React.createClass({
-    displayName: 'Loader',
-
-    /**
+    displayName: 'Loader'
+  /**
      * @type {Object}
      */
     propTypes: {
@@ -2051,9 +1883,8 @@ var Loader = React.createClass({
         color: React.PropTypes.string,
         size: React.PropTypes.string,
         margin: React.PropTypes.string
-    },
-
-    /**
+    }
+  /**
      * @return {Object}
      */
     getDefaultProps: function getDefaultProps() {
@@ -2062,9 +1893,8 @@ var Loader = React.createClass({
             color: '#ffffff',
             size: '50px'
         };
-    },
-
-    /**
+    }
+  /**
      * @return {Object}
      */
     getSquareStyle: function getSquareStyle() {
@@ -2074,9 +1904,8 @@ var Loader = React.createClass({
             height: this.props.size,
             verticalAlign: this.props.verticalAlign
         };
-    },
-
-    /**
+    }
+  /**
      * @param  {Number} i
      * @return {Object}
      */
@@ -2090,9 +1919,8 @@ var Loader = React.createClass({
             animation: animation,
             animationFillMode: animationFillMode
         };
-    },
-
-    /**
+    }
+  /**
      * @param  {Number} i
      * @return {Object}
      */
@@ -2100,14 +1928,13 @@ var Loader = React.createClass({
         return assign(this.getSquareStyle(i), this.getAnimationStyle(i), {
             display: 'inline-block'
         });
-    },
-
-    /**
+    }
+  /**
      * @param  {Boolean} loading
      * @return {ReactComponent || null}
      */
     renderLoader: function renderLoader(loading) {
-        if (loading) {
+        if (this.props.loading) {
             return React.createElement(
                 'div',
                 { id: this.props.id, className: this.props.className },
@@ -2116,14 +1943,13 @@ var Loader = React.createClass({
         }
 
         return null;
-    },
-
-    render: function render() {
+    }
+  render: function render() {
         return this.renderLoader(this.props.loading);
     }
 });
 
-module.exports = Loader;
+export default Loader;
 
 },{"domkit/appendVendorPrefix":"/Users/yuanyan/React/halogen/node_modules/domkit/appendVendorPrefix.js","domkit/insertKeyframesRule":"/Users/yuanyan/React/halogen/node_modules/domkit/insertKeyframesRule.js","react":false}],"/Users/yuanyan/React/halogen/src/SyncLoader.js":[function(require,module,exports){
 'use strict';
@@ -2132,9 +1958,7 @@ var React = require('react');
 var assign = require('domkit/appendVendorPrefix');
 var insertKeyframesRule = require('domkit/insertKeyframesRule');
 
-/**
- * @type {Object}
- */
+
 var keyframes = {
     '33%': {
         transform: 'translateY(10px)'
@@ -2147,15 +1971,12 @@ var keyframes = {
     }
 };
 
-/**
- * @type {String}
- */
+
 var animationName = insertKeyframesRule(keyframes);
 
 var Loader = React.createClass({
-    displayName: 'Loader',
-
-    /**
+    displayName: 'Loader'
+  /**
      * @type {Object}
      */
     propTypes: {
@@ -2163,9 +1984,8 @@ var Loader = React.createClass({
         color: React.PropTypes.string,
         size: React.PropTypes.string,
         margin: React.PropTypes.string
-    },
-
-    /**
+    }
+  /**
      * @return {Object}
      */
     getDefaultProps: function getDefaultProps() {
@@ -2175,9 +1995,8 @@ var Loader = React.createClass({
             size: '15px',
             margin: '2px'
         };
-    },
-
-    /**
+    }
+  /**
      * @return {Object}
      */
     getBallStyle: function getBallStyle() {
@@ -2189,9 +2008,8 @@ var Loader = React.createClass({
             borderRadius: '100%',
             verticalAlign: this.props.verticalAlign
         };
-    },
-
-    /**
+    }
+  /**
      * @param  {Number} i
      * @return {Object}
      */
@@ -2203,9 +2021,8 @@ var Loader = React.createClass({
             animation: animation,
             animationFillMode: animationFillMode
         };
-    },
-
-    /**
+    }
+  /**
      * @param  {Number} i
      * @return {Object}
      */
@@ -2213,14 +2030,13 @@ var Loader = React.createClass({
         return assign(this.getBallStyle(i), this.getAnimationStyle(i), {
             display: 'inline-block'
         });
-    },
-
-    /**
+    }
+  /**
      * @param  {Boolean} loading
      * @return {ReactComponent || null}
      */
     renderLoader: function renderLoader(loading) {
-        if (loading) {
+        if (this.props.loading) {
             return React.createElement(
                 'div',
                 { id: this.props.id, className: this.props.className },
@@ -2231,14 +2047,13 @@ var Loader = React.createClass({
         };
 
         return null;
-    },
-
-    render: function render() {
+    }
+  render: function render() {
         return this.renderLoader(this.props.loading);
     }
 });
 
-module.exports = Loader;
+export default Loader;
 
 },{"domkit/appendVendorPrefix":"/Users/yuanyan/React/halogen/node_modules/domkit/appendVendorPrefix.js","domkit/insertKeyframesRule":"/Users/yuanyan/React/halogen/node_modules/domkit/insertKeyframesRule.js","react":false}],"halogen":[function(require,module,exports){
 'use strict';

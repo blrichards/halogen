@@ -7,9 +7,8 @@ var ReactDOM = require('react-dom');
 var selfCleaningTimeout = {
     componentDidUpdate: function componentDidUpdate() {
         clearTimeout(this.timeoutID);
-    },
-
-    setTimeout: function (_setTimeout) {
+    }
+  setTimeout: function (_setTimeout) {
         function setTimeout() {
             return _setTimeout.apply(this, arguments);
         }
@@ -26,35 +25,28 @@ var selfCleaningTimeout = {
 };
 
 var ComponentPreview = React.createClass({
-    displayName: 'ComponentPreview',
-
-    propTypes: {
+    displayName: 'ComponentPreview'
+  propTypes: {
         code: React.PropTypes.string.isRequired
-    },
-
-    mixins: [selfCleaningTimeout],
-
-    render: function render() {
+    }
+  mixins: [selfCleaningTimeout]
+  render: function render() {
         return React.createElement('div', { ref: 'mount' });
-    },
-
-    componentDidMount: function componentDidMount() {
+    }
+  componentDidMount: function componentDidMount() {
         this.executeCode();
-    },
-
-    componentDidUpdate: function componentDidUpdate(prevProps) {
+    }
+  componentDidUpdate: function componentDidUpdate(prevProps) {
         // execute code only when the state's not being updated by switching tab
         // this avoids re-displaying the error, which comes after a certain delay
         if (this.props.code !== prevProps.code) {
             this.executeCode();
         }
-    },
-
-    compileCode: function compileCode() {
+    }
+  compileCode: function compileCode() {
         return JSXTransformer.transform('(function() {' + this.props.code + '\n})();', { harmony: true }).code;
-    },
-
-    executeCode: function executeCode() {
+    }
+  executeCode: function executeCode() {
         var mountNode = this.refs.mount;
 
         try {
@@ -80,9 +72,8 @@ var ComponentPreview = React.createClass({
 var IS_MOBILE = navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/webOS/i) || navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPod/i) || navigator.userAgent.match(/BlackBerry/i) || navigator.userAgent.match(/Windows Phone/i);
 
 var CodeMirrorEditor = React.createClass({
-    displayName: 'CodeMirrorEditor',
-
-    componentDidMount: function componentDidMount() {
+    displayName: 'CodeMirrorEditor'
+  componentDidMount: function componentDidMount() {
         if (IS_MOBILE) return;
 
         this.editor = CodeMirror.fromTextArea(this.refs.editor, {
@@ -95,21 +86,18 @@ var CodeMirrorEditor = React.createClass({
             readOnly: this.props.readOnly
         });
         this.editor.on('change', this.handleChange);
-    },
-
-    componentDidUpdate: function componentDidUpdate() {
+    }
+  componentDidUpdate: function componentDidUpdate() {
         if (this.props.readOnly) {
             this.editor.setValue(this.props.codeText);
         }
-    },
-
-    handleChange: function handleChange() {
+    }
+  handleChange: function handleChange() {
         if (!this.props.readOnly && this.props.onChange) {
             this.props.onChange(this.editor.getValue());
         }
-    },
-
-    render: function render() {
+    }
+  render: function render() {
         // wrap in a div to fully contain CodeMirror
         var editor;
 
@@ -132,33 +120,28 @@ var CodeMirrorEditor = React.createClass({
 });
 
 var ReactPlayground = React.createClass({
-    displayName: 'ReactPlayground',
-
-    propTypes: {
+    displayName: 'ReactPlayground'
+  propTypes: {
         codeText: React.PropTypes.string.isRequired
-    },
-
-    getInitialState: function getInitialState() {
+    }
+  getInitialState: function getInitialState() {
         return {
             code: this.props.codeText
         };
-    },
-
-    handleCodeChange: function handleCodeChange(code) {
+    }
+  handleCodeChange: function handleCodeChange(code) {
         this.setState({
             code: code
         });
-    },
-
-    changeTab: function changeTab() {
+    }
+  changeTab: function changeTab() {
         if (this.state.tab == 'preview') this.setState({
             tab: 'edit'
         });else this.setState({
             tab: 'preview'
         });
-    },
-
-    render: function render() {
+    }
+  render: function render() {
 
         var tabText = this.state.tab == 'preview' ? 'Live Preview' : 'Live Edit';
         var code = React.createElement(
