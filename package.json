@@ -1,6 +1,6 @@
 {
   "name": "halogen",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A collection of loading spinners with React.js",
   "main": "lib/index.js",
   "author": "Yuanyan Cao",
@@ -27,7 +27,8 @@
     "webpack": "^3.9.1"
   },
   "scripts": {
-    "build": "./bin/build"
+    "build": "./bin/build",
+    "publish": "node ./bin/build && npm publish"
   },
   "keywords": [
     "react",
