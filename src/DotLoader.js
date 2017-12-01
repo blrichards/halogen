@@ -1,11 +1,12 @@
-var React = require('react');
-var assign = require('domkit/appendVendorPrefix');
-var insertKeyframesRule = require('domkit/insertKeyframesRule');
+const React = require('react');
+const PropTypes = require('prop-types');
+const assign = require('domkit/appendVendorPrefix');
+const insertKeyframesRule = require('domkit/insertKeyframesRule');
 
 /**
  * @type {Object}
  */
-var rotateKeyframes = {
+const rotateKeyframes = {
     '100%': {
         transform: 'rotate(360deg)'
     }
@@ -14,7 +15,7 @@ var rotateKeyframes = {
 /**
  * @type {Object}
  */
-var bounceKeyframes = {
+const bounceKeyframes = {
     '0%, 100%': {
         transform: 'scale(0)'
     },
@@ -26,22 +27,22 @@ var bounceKeyframes = {
 /**
  * @type {String}
  */
-var rotateAnimationName = insertKeyframesRule(rotateKeyframes);
+const rotateAnimationName = insertKeyframesRule(rotateKeyframes);
 
 /**
  * @type {String}
  */
-var bounceAnimationName = insertKeyframesRule(bounceKeyframes);
+const bounceAnimationName = insertKeyframesRule(bounceKeyframes);
 
-var Loader = React.createClass({
+const Loader = React.createClass({
     /**
      * @type {Object}
      */
     propTypes: {
-        loading: React.PropTypes.bool,
-        color: React.PropTypes.string,
-        size: React.PropTypes.string,
-        margin: React.PropTypes.string
+        loading: PropTypes.bool,
+        color: PropTypes.string,
+        size: PropTypes.string,
+        margin: PropTypes.string
     },
 
     /**
@@ -74,8 +75,8 @@ var Loader = React.createClass({
      * @return {Object}
      */
     getAnimationStyle: function(i) {
-        var animation = [i==0 ? rotateAnimationName : bounceAnimationName, '2s', i==2? '-1s': '0s', 'infinite', 'linear'].join(' ');
-        var animationFillMode = 'forwards';
+        const animation = [i==0 ? rotateAnimationName : bounceAnimationName, '2s', i==2? '-1s': '0s', 'infinite', 'linear'].join(' ');
+        const animationFillMode = 'forwards';
 
         return {
             animation: animation,
@@ -88,8 +89,8 @@ var Loader = React.createClass({
      * @return {Object}
      */
     getStyle: function(i) {
-        var size = parseInt(this.props.size);
-        var ballSize = size/2;
+        const size = parseInt(this.props.size);
+        const ballSize = size/2;
 
         if (i) {
             return assign(

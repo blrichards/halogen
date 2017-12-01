@@ -1,11 +1,12 @@
-var React = require('react');
-var assign = require('domkit/appendVendorPrefix');
-var insertKeyframesRule = require('domkit/insertKeyframesRule');
+const React = require('react');
+const PropTypes = require('prop-types');
+const assign = require('domkit/appendVendorPrefix');
+const insertKeyframesRule = require('domkit/insertKeyframesRule');
 
 /**
  * @type {Object}
  */
-var rightRotateKeyframes = {
+const rightRotateKeyframes = {
     '0%': {
         transform: 'rotateX(0deg) rotateY(0deg) rotateZ(0deg)'
 
@@ -18,7 +19,7 @@ var rightRotateKeyframes = {
 /**
  * @type {Object}
  */
-var leftRotateKeyframes = {
+const leftRotateKeyframes = {
     '0%': {
         transform: 'rotateX(0deg) rotateY(0deg) rotateZ(0deg)'
     },
@@ -30,22 +31,22 @@ var leftRotateKeyframes = {
 /**
  * @type {String}
  */
-var rightRotateAnimationName = insertKeyframesRule(rightRotateKeyframes);
+const rightRotateAnimationName = insertKeyframesRule(rightRotateKeyframes);
 
 /**
  * @type {String}
  */
-var leftRotateAnimationName = insertKeyframesRule(leftRotateKeyframes);
+const leftRotateAnimationName = insertKeyframesRule(leftRotateKeyframes);
 
-var Loader = React.createClass({
+const Loader = React.createClass({
     /**
      * @type {Object}
      */
     propTypes: {
-        loading: React.PropTypes.bool,
-        color: React.PropTypes.string,
-        size: React.PropTypes.string,
-        margin: React.PropTypes.string
+        loading: PropTypes.bool,
+        color: PropTypes.string,
+        size: PropTypes.string,
+        margin: PropTypes.string
     },
 
     /**
@@ -79,9 +80,9 @@ var Loader = React.createClass({
      * @return {Object}
      */
     getAnimationStyle: function(i) {
-        var animation = [i==1? rightRotateAnimationName: leftRotateAnimationName, '2s', '0s', 'infinite', 'linear'].join(' ');
-        var animationFillMode = 'forwards';
-        var perspective = '800px';
+        const animation = [i==1? rightRotateAnimationName: leftRotateAnimationName, '2s', '0s', 'infinite', 'linear'].join(' ');
+        const animationFillMode = 'forwards';
+        const perspective = '800px';
 
         return {
             perspective: perspective,
@@ -95,7 +96,7 @@ var Loader = React.createClass({
      * @return {Object}
      */
     getStyle: function(i) {
-        var size = parseInt(this.props.size);
+        const size = parseInt(this.props.size);
 
         if (i) {
             return assign(

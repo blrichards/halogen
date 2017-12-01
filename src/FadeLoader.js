@@ -1,11 +1,12 @@
-var React = require('react');
-var assign = require('domkit/appendVendorPrefix');
-var insertKeyframesRule = require('domkit/insertKeyframesRule');
+const React = require('react');
+const PropTypes = require('prop-types');
+const assign = require('domkit/appendVendorPrefix');
+const insertKeyframesRule = require('domkit/insertKeyframesRule');
 
 /**
  * @type {Object}
  */
-var keyframes = {
+const keyframes = {
     '50%': {
         opacity: 0.3
     },
@@ -17,19 +18,19 @@ var keyframes = {
 /**
  * @type {String}
  */
-var animationName = insertKeyframesRule(keyframes);
+const animationName = insertKeyframesRule(keyframes);
 
-var Loader = React.createClass({
+const Loader = React.createClass({
     /**
      * @type {Object}
      */
     propTypes: {
-        loading: React.PropTypes.bool,
-        color: React.PropTypes.string,
-        height: React.PropTypes.string,
-        width: React.PropTypes.string,
-        margin: React.PropTypes.string,
-        radius: React.PropTypes.string
+        loading: PropTypes.bool,
+        color: PropTypes.string,
+        height: PropTypes.string,
+        width: PropTypes.string,
+        margin: PropTypes.string,
+        radius: PropTypes.string
     },
 
     /**
@@ -66,8 +67,8 @@ var Loader = React.createClass({
      * @return {Object}
      */
     getAnimationStyle: function(i) {
-        var animation = [animationName, '1.2s', (i * 0.12) + 's', 'infinite', 'ease-in-out'].join(' ');
-        var animationFillMode = 'both';
+        const animation = [animationName, '1.2s', (i * 0.12) + 's', 'infinite', 'ease-in-out'].join(' ');
+        const animationFillMode = 'both';
 
         return {
             animation: animation,
@@ -80,10 +81,10 @@ var Loader = React.createClass({
      * @return {Object}
      */
     getPosStyle: function(i) {
-        var radius = '20';
-        var quarter = (radius / 2) + (radius / 5.5);
+        const radius = '20';
+        const quarter = (radius / 2) + (radius / 5.5);
 
-        var lines = {
+        const lines = {
             l1: {
                 top: radius,
                 left: 0
@@ -148,7 +149,7 @@ var Loader = React.createClass({
      */
     renderLoader: function(loading) {
         if (loading) {
-            var style = {
+            const style = {
                 position: 'relative',
                 fontSize: 0
             };

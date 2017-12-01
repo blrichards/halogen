@@ -1,11 +1,12 @@
-var React = require('react');
-var assign = require('domkit/appendVendorPrefix');
-var insertKeyframesRule = require('domkit/insertKeyframesRule');
+const React = require('react');
+const PropTypes = require('prop-types');
+const assign = require('domkit/appendVendorPrefix');
+const insertKeyframesRule = require('domkit/insertKeyframesRule');
 
 /**
  * @type {Object}
  */
-var keyframes = {
+const keyframes = {
     '100%': {
         transform: 'rotate(360deg)'
     }
@@ -14,17 +15,17 @@ var keyframes = {
 /**
  * @type {String}
  */
-var animationName = insertKeyframesRule(keyframes);
+const animationName = insertKeyframesRule(keyframes);
 
-var Loader = React.createClass({
+const Loader = React.createClass({
     /**
      * @type {Object}
      */
     propTypes: {
-        loading: React.PropTypes.bool,
-        color: React.PropTypes.string,
-        size: React.PropTypes.string,
-        margin: React.PropTypes.string
+        loading: PropTypes.bool,
+        color: PropTypes.string,
+        size: PropTypes.string,
+        margin: PropTypes.string
     },
 
     /**
@@ -56,8 +57,8 @@ var Loader = React.createClass({
      * @return {Object}
      */
     getAnimationStyle: function(i) {
-        var animation = [animationName, '0.6s', '0s', 'infinite', 'linear'].join(' ');
-        var animationFillMode = 'forwards';
+        const animation = [animationName, '0.6s', '0s', 'infinite', 'linear'].join(' ');
+        const animationFillMode = 'forwards';
 
         return {
             animation: animation,
@@ -70,8 +71,8 @@ var Loader = React.createClass({
      * @return {Object}
      */
     getStyle: function(i) {
-        var size = parseInt(this.props.size);
-        var moonSize = size/7;
+        const size = parseInt(this.props.size);
+        const moonSize = size/7;
 
         if (i == 1) {
             return assign(
