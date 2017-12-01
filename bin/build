@@ -1,0 +1,31 @@
+#!/usr/local/bin/node
+const fs = require('fs')
+const rimraf = require('rimraf')
+const { exec } = require('child_process')
+
+const srcFolder = './src'
+const buildFolder = './build'
+
+if (fs.existsSync(buildFolder)) {
+  rimraf.sync(buildFolder)
+}
+
+fs.mkdirSync(buildFolder)
+
+const sourceFiles = []
+
+// run all source files through babel
+fs.readdirSync(srcFolder).forEach(sourceFile => {
+  sourceFiles.push(sourceFile)
+  exec(`./node_modules/.bin/babel ${srcFolder}/${sourceFile}`, (err, out) => {
+    if (err) {
+      return console.error(err)
+    }
+    fs.writeFile(`${buildFolder}/${sourceFile}`, out, (err) => {
+      if (err) {
+        return console.error(err)
+      }
+      console.log(`${sourceFile} compiled successfully`)
+    })
+  })
+})
